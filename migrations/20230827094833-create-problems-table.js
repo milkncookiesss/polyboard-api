@@ -9,6 +9,7 @@ module.exports = {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
+          unique: true,
           autoIncrement: true
         },
         name: {
@@ -17,18 +18,37 @@ module.exports = {
         },
         created_by: {
           type: Sequelize.INTEGER,
-
+          references: {
+            model: {
+              tableName: 'users',
+              schema: 'users'
+            },
+            key: 'id'
+          },
+          allowNull: false
+        },
+        route_path: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        weight: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        created_at: {
+          type: Sequelize.DATE
+        },
+        updated_at: {
+          type: Sequelize.DATE
         }
+      },
+      {
+        schema: 'problems'
       }
     )
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('problems', { schema: 'problems' });
   }
 };

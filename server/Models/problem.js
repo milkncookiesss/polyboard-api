@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-export default class User extends Sequelize.Model {
+export default class Problem extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init(
       {
@@ -8,36 +8,31 @@ export default class User extends Sequelize.Model {
           type: DataTypes.INTEGER,
           primaryKey: true,
           unique: true,
-          allowNull: false,
-          autoIncrement: true
-        },
-        user_name: {
-          type: Sequelize.STRING,
-          unique: true,
+          autoIncrement: true,
           allowNull: false
         },
-        display_name: {
-          type: Sequelize.STRING
-        },
-        email: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          unique: true,
-          isEmail: true
-        },
-        password: {
+        name: {
           type: Sequelize.STRING,
           allowNull: false
         },
-        user_token: {
-          type: Sequelize.STRING
+        createdBy: {
+          type: Sequelize.INTEGER,
+          allowNull: false
         },
+        routePath: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        weight: {
+          type: Sequelize.STRING,
+          allowNull: false
+        }
       },
       {
         sequelize,
         timestamps: true,
-        schema: 'users',
-        tableName: 'users',
+        schema: 'problems',
+        tableName: 'problems',
         underscored: true
       }
     )
