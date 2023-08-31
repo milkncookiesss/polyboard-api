@@ -28,9 +28,7 @@ module.exports = {
         schema: "users"
       },
       {
-        where: {
-          id: 1
-        }
+        user_name: "admin"
       }
     )
   }

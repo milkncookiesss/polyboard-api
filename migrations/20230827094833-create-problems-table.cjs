@@ -1,6 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.sequelize.query('CREATE SCHEMA problems');
     return queryInterface.createTable(
       'problems',
       {
@@ -47,6 +48,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropSchema('problems');
     await queryInterface.dropTable('problems', { schema: 'problems' });
   }
 };
