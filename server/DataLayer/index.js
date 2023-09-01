@@ -2,14 +2,26 @@ import pg from "pg";
 import Sequelize from "sequelize";
 import dotenv from "dotenv";
 dotenv.config()
-// const { DB_NAME, DB_PASSWORD, DB_USER } = process.env
 
-console.log("wtf is this shit man??? ============> ", process.env.DB_NAME);
+let sequelize;
 
-const sequelize = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
-  host: "localhost",
-  dialect: "postgres",
-});
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, 
+    {
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
+      }
+    }
+  );
+} else {
+  sequelize = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
+    host: "localhost",
+    dialect: "postgres",
+  });
+}
 
 try {
   await sequelize.authenticate();
