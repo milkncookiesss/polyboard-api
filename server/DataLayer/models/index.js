@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-console.log('the env in index is this ', env);
+
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
@@ -39,7 +39,7 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-console.log('huh>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ', db);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
