@@ -14,9 +14,11 @@ import Sequelize from 'sequelize';
 // // console.log('========> ',__dirname);
 
 // // const configPath = __dirname + '/../../config';
-
 import config from '../../../config/config.json' assert { type: 'json' };
-console.log(config);
+console.log('=========================================================');
+console.log('entering db load');
+console.log('=========================================================');
+
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -32,7 +34,9 @@ import Problem from './problem.js';
 let sequelize;
 if (process.env.DATABASE_URL) {
   console.log('has db url attached');
-  sequelize = new Sequelize(process.env.DATABASE_URL, config[env]);
+  const userName = process.env.DB_USER;
+  const dbName = process.env.DB_NAME;
+  sequelize = new Sequelize(process.env.DATABASE_URL);
 } else {
   console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
