@@ -27,7 +27,7 @@ CREATE TABLE "sends" (
   "problem" integer,
   "sentBy" integer,
   "averageRating" integer,
-  "grade" enum,
+  "grade" varchar,
   "note" varchar,
   "created_at" timestamp
 );
