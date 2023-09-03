@@ -36,7 +36,10 @@ if (process.env.DATABASE_URL) {
   console.log('has db url attached');
   const userName = process.env.DB_USER;
   const dbName = process.env.DB_NAME;
-  sequelize = new Sequelize(process.env.DATABASE_URL);
+  sequelize = new Sequelize(process.env.DATABASE_URL, { ssl: {
+    rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+    }
+  });
 } else {
   console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
