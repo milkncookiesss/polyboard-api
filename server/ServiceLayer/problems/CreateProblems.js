@@ -5,8 +5,8 @@ function createProblem() {
   return async (req, res, next) => {
     console.log(req.body);
     const { userId, routeName, routePath, creatorNote, weight, grade } = req.body;
-    
-    const problem = await DB.createProblem(JSON.parse(userId), JSON.parse(routePath), JSON.parse(weight), grade, JSON.parse(routeName), JSON.parse(creatorNote));
+    // let testPath = [];
+    const problem = await DB.createProblem(JSON.parse(userId), routePath, JSON.parse(weight), grade, JSON.parse(routeName), JSON.parse(creatorNote));
 
     // console.log('?????? ', problem);
     // console.log(JSON.parse(problem));
