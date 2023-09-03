@@ -7,14 +7,20 @@ import path from 'path';
 // const Sequelize = require('sequelize');
 import Sequelize from 'sequelize';
 // const process = require('process');
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
+// // console.log('========> ',__dirname);
+
+// // const configPath = __dirname + '/../../config';
+
+import config from '../../../config/config.json' assert { type: 'json' };
+console.log(config);
 
 import dotenv from 'dotenv';
 dotenv.config();
-const basename = path.basename(__filename);
+// const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 // const db = {};
 // const config = require(__dirname + '/../config/config.json')[env];
@@ -25,11 +31,27 @@ import Problem from './problem.js';
 
 let sequelize;
 if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, config);
+  console.log('has db url attached');
+  sequelize = new Sequelize(process.env.DATABASE_URL, config[env]);
 } else {
+  console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: "127.0.0.1",
-    dialect: "postgres"
+    host: 'localhost',
+    port: 5433,
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+      }
+    },
+    pool: {
+      max: 100,
+      min: 0,
+      idle: 200000,
+      // @note https://github.com/sequelize/sequelize/issues/8133#issuecomment-359993057
+      acquire: 1000000,
+    }
   });
 }
 

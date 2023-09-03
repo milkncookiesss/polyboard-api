@@ -3,21 +3,22 @@
     "username": "postgres",
     "password": "student",
     "database": "polyboard",
-    "host": "127.0.0.1",
+    "host": "localhost",
+    "port": 5433,
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "student",
     "database": "polyboard",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": null,
     "database": "polyboard",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   }
 }
