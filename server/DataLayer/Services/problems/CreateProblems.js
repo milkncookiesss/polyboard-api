@@ -21,7 +21,7 @@ async function createProblem(userId, routePath, weight, grade, routeName, creato
   // console.log('db layer ',problem)
   problemsList.push(problem);
 
-  return problemsList;
+  return problem;
 }
 
 export { createProblem };
