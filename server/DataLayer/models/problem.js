@@ -20,7 +20,7 @@ export default class Problem extends Sequelize.Model {
           allowNull: false
         },
         routePath: {
-          type: Sequelize.STRING,
+          type: Sequelize.ARRAY(DataTypes.STRING),
           allowNull: false
         },
         weight: {

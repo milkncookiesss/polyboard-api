@@ -40,7 +40,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 
-  console.log(sequelize);
+  // console.log(sequelize);
 } else {
   console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {

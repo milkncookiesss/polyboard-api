@@ -27,7 +27,7 @@ module.exports = {
           allowNull: false
         },
         route_path: {
-          type: Sequelize.STRING,
+          type: Sequelize.ARRAY(Sequelize.STRING),
           allowNull: false
         },
         weight: {

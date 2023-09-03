@@ -1,3 +1,5 @@
+import * as DB from '../../DataLayer/Services/problems/GetProblems.js';
+
 
 function getProblems() {
   return async (req, res, next) => {
@@ -6,7 +8,10 @@ function getProblems() {
     // console.log(body);
     const testStr = "returing this thing hopefully please help me";
     console.log("we're hitting this service controller i think");
-    res.send(testStr).status(200);
+    const allProblems = await DB.getProblemsByUserId();
+
+
+    res.send(allProblems).status(200);
     next();
   }
 }
