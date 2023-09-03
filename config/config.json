@@ -4,6 +4,7 @@
     "password": "student",
     "database": "polyboard",
     "host": "localhost",
+    "port": 5433,
     "dialect": "postgres"
   },
   "test": {

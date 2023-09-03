@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "npx sequelize-cli db:migrate",
-    "dev": "npm install && nodemon index.js && npm run migrate",
-    "start": "npm install && node index.js && npm run migrate"
+    "migrate": "npx sequelize db:migrate",
+    "dev": "npm install && npm run migrate && nodemon index.js",
+    "start": "npm install && npm run migrate && node index.js"
   },
   "repository": {
     "type": "git",
