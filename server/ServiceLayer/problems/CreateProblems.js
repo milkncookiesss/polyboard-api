@@ -10,7 +10,8 @@ function createProblem() {
 
     // console.log('?????? ', problem);
     // console.log(JSON.parse(problem));
-    res.send(problem).status(200);
+
+    res.send({ problem }).status(200);
     next();
   }
 }
