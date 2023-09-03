@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "npx sequelize db:migrate",
     "dev": "npm install && npm run db:schema && npm run migrate && nodemon index.js ",
-    "start": "npm install && node index.js && npm run migrate",
+    "start": "npm install && npm run db:schema && npm run migrate && node index.js",
     "db:schema": "node ./scripts/schema.js"
   },
   "repository": {
