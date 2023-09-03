@@ -1,15 +1,11 @@
 'use strict';
 
 // const fs = require('fs');
-import fs from 'fs';
 // const path = require('path');
-import path from 'path';
+
 // const Sequelize = require('sequelize');
 import Sequelize from 'sequelize';
 // const process = require('process');
-// import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 // // console.log('========> ',__dirname);
 
@@ -35,10 +31,16 @@ let sequelize;
 if (process.env.DATABASE_URL) {
   console.log('has db url attached');
   sequelize = new Sequelize(process.env.DATABASE_URL, { dialectOptions: { ssl: {
+      require: false,
       rejectUnauthorized: false // <<<<<<< YOU NEED THIS
       }
+    },
+    pool: {
+
     }
   });
+
+  console.log(sequelize);
 } else {
   console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -85,6 +87,60 @@ const models = {
 //     db[modelName].associate(db);
 //   }
 // });
+
+/**
+ * db migration kind of janky but it is what it is for short period of time
+ */
+// import path from 'path';
+// import fs from 'fs';
+// import { fileURLToPath } from 'url';
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// const getAllMigrations = async () => {
+//   const migrations = fs.readdirSync(__dirname + '/../../../migrations');
+//   const dbMigrations = await sequelize.query("SELECT * FROM SequelizeMeta", {
+//     type: Sequelize.QueryTypes.SELECT
+//   });
+//   const pendingMigrations = [], completedMigrations = []
+//   for (const migration of migrations) {
+//     const isExistsInDatabase = dbMigrations.find(({ name }) => name == migration)
+//     if (isExistsInDatabase) {
+//       completedMigrations.push(migration);
+//     } else {
+//       pendingMigrations.push(migration);
+//     }
+//   }
+
+//   console.log('-------------------> ', migrations);
+//   return { migraitons, completedMigrations, pendingMigrations };
+// }
+
+// const UpAllMigrations = async () => {
+//   const { pendingMigrations } = await getAllMigrations();
+//   const outPut = [];
+
+//   for (let i = 0, c = pendingMigrations.length; i < c; i++) {
+//     const migration = require(__dirname + '/../../migrations/' + pendingMigrations[i]);
+//     const result = await migration.up(db.queryInterface, Sequelize);
+//     outPut.push(result);
+//     await sequelize.query("INSERT INTO SequelizeMeta VALUES(:name)", {
+//       type: Sequelize.QueryTypes.INSERT,
+//       replacements: {
+//         name: pendingMigrations[i]
+//       }
+//     })
+//   }
+
+//   return outPut;
+// }
+
+
+// UpAllMigrations();
+/**
+ * end of migration
+ */
 
 Object.values(models)
       .filter((model) => typeof model.associate === "function")
