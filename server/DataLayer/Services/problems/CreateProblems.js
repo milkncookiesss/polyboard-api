@@ -14,7 +14,7 @@ async function createProblem(userId, routePath, weight, grade, routeName, creato
   let lastId = problems[problems.length - 1].id + 1;
   // console.log(routePath);
   // routePath.replace(/\[|\]/g,"").split(',')
-  userId = parseInt(userId);
+  // userId = parseInt(userId);
   const problem = { id: lastId, routeName, userId, creatorNote, routePath, weight, createdAt: now, updatedAt: now};
   // console.log('db layer ',problem)
   problems.push(problem);
