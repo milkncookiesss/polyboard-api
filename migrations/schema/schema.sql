@@ -3,7 +3,7 @@ CREATE TABLE public."SequelizeMeta" (
 );
 
 CREATE TABLE "users" (
-  "id" integer,
+  "id" serial PRIMARY KEY,
   "username" varchar,
   "displayname" varchar,
   "email" varchar,
@@ -13,7 +13,7 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "problems" (
-  "id" integer,
+  "id" serial PRIMARY KEY,
   "name" varchar,
   "createdByUser" integer,
   "creatorNote" varchar,
