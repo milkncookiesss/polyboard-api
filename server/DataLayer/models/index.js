@@ -63,6 +63,10 @@ if (process.env.DATABASE_URL) {
   });
 }
 
+console.log('===============================================')
+console.log(sequelize)
+console.log('===============================================')
+
 const models = {
   User: User.init(sequelize, Sequelize),
   Problem: Problem.init(sequelize, Sequelize)
