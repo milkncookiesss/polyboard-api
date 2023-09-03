@@ -10,7 +10,7 @@ function createProblem() {
       if (routePath.length < 1) {
         routePath = "";
       }
-      const problem = await DB.createProblem(JSON.parse(userId), routePath, JSON.parse(weight), grade, JSON.parse(routeName), JSON.parse(creatorNote));
+      const problem = await DB.createProblem(userId, routePath, weight, grade, routeName,creatorNote);
       res.send({ problem: problem }).status(200);
       next();
     } catch (err) {
