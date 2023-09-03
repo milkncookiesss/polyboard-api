@@ -14,10 +14,10 @@ CREATE TABLE "users" (
 
 CREATE TABLE "problems" (
   "id" integer,
-  "name" string,
+  "name" varchar,
   "createdByUser" integer,
-  "creatorNote" string,
-  "routePath" string,
+  "creatorNote" varchar,
+  "routePath" varchar,
   "weight" integer,
   "created_at" timestamp,
   "update_at" timestamp
@@ -28,7 +28,7 @@ CREATE TABLE "sends" (
   "sentBy" integer,
   "averageRating" integer,
   "grade" enum,
-  "note" string,
+  "note" varchar,
   "created_at" timestamp
 );
 
