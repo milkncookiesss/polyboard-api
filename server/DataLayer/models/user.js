@@ -5,11 +5,9 @@ export default class User extends Sequelize.Model {
     return super.init(
       {
         id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
+          type: DataTypes.UUID,
           unique: true,
-          allowNull: false,
-          autoIncrement: true
+          allowNull: false
         },
         user_name: {
           type: Sequelize.STRING,

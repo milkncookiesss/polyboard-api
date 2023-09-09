@@ -6,8 +6,7 @@ module.exports = {
       'users',
       {
         id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
+          type: Sequelize.UUID,
           unique: true,
           autoIncrement: true
         },

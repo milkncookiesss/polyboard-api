@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "npx sequelize db:migrate",
-    "dev": "npm install && npm run db:schema && npm run migrate && nodemon index.js ",
+    "dev": "npm install && npm run db:schema && npm run migrate && nodemon index.js",
     "start": "npm install && npm run db:schema && npm run migrate && node index.js",
     "db:schema": "node ./scripts/schema.js"
   },
@@ -28,7 +28,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
     "pg": "^8.11.3",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
