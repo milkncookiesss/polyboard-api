@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 /**
  * Get All Problems by userId
  */
-async function getProblemsByUserId(userId, offset, limit) {
+async function getAllProblems(offset, limit) {
   return problems;
   // return Problem.findAll({
   //   where: {
@@ -22,4 +22,4 @@ async function getProblemsByUserId(userId, offset, limit) {
   // });
 }
 
-export { getProblemsByUserId }
+export { getAllProblems }

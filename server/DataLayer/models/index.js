@@ -45,7 +45,7 @@ if (process.env.DATABASE_URL) {
   console.log('no db url')
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: 'localhost',
-    port: 5433,
+    port: process.env.SEQUELIZE_PORT,
     dialect: "postgres",
     dialectOptions: {
       ssl: {
