@@ -1,4 +1,18 @@
 {
+  "local": {
+    "username": "postgres",
+    "password": "student",
+    "database": "polyboard",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
   "development": {
     "username": "yyyhygjyjuagbd",
     "password": "995f4b98706f1c569cee6f0a239e0e133113f051a1bedc06588c4387acb07aff",
