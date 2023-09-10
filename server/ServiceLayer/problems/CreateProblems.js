@@ -7,11 +7,11 @@ import * as DB from '../../DataLayer/Services/problems/CreateProblems.js';
 function createProblem() {
   return async (req, res, next) => {
     console.log(req.body);
-    const { userId, name="", routePath, creatorNote="", weight="", grade="" } = req.body;
-    console.log('-------> ', typeof routePath);
+    const { userId, name="", route, creatorNote="", weight="", grade="" } = req.body;
+    console.log('-------> ', typeof route);
     // let testPath = [];
     try{
-      const problem = await DB.createProblem(userId, routePath, weight, grade, name,creatorNote);
+      const problem = await DB.createProblem(userId, route, weight, grade, name,creatorNote);
       console.log('-------------------------------');
       console.log(problem);
       console.log('-------------------------------');

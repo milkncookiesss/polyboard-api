@@ -9,12 +9,12 @@ const Sequelize = db.Sequelize;
 /**
  * create problem data layer
 */
-async function createProblem(userId, routePath, weight, grade, name, creatorNote) {
+async function createProblem(userId, route, weight, grade, name, creatorNote) {
   const problemId = uuid();
   const problem = {
     id: problemId,
     createdBy: userId,
-    route: routePath,
+    route,
     weight,
     name,
     creatorNote
