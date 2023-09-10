@@ -1,27 +1,30 @@
 import db from '../../models/index.js';
-import problems from '../../../MockProblems/MockProblems.js';
+import { uuid } from 'uuidv4';
 
 const Problem = db.Problem;
 const Sequelize = db.Sequelize;
-const Op = Sequelize.Op;
-const now = new Date();
-let id = 0;
-/**
- * User Creates Problem
- */
 
-async function createProblem(userId, routePath, weight, grade, name, creatorNote) {
-  let problemsList = problems.problems;
-  let idString = id.toString();
-  // let lastId = parseInt(problemsList[problemsList.length - 1].id) + 1;
-  // let lastIdString = lastId.toString();
-  // console.log(routePath);
-  // routePath.replace(/\[|\]/g,"").split(',')
-  // userId = parseInt(userId);
-  const problem = { id: idString, name, userId, creatorNote, routePath, weight, createdAt: now, updatedAt: now };
-  // console.log('db layer ',problem)
-  problemsList.push(problem);
-  id++;
+
+// -------------------------------------------------------------------------- //
+/**
+ * create problem data layer
+*/
+async function createProblem(userId, route, weight, grade, name, creatorNote) {
+  const problemId = uuid();
+  const problem = {
+    id: problemId,
+    createdBy: userId,
+    route,
+    weight,
+    name,
+    creatorNote
+  };
+  try {
+    await Problem.create(problem)
+  } catch(err) {
+    throw err;
+  }
+
   return problem;
 }
 
