@@ -10,12 +10,12 @@ export default class User extends Sequelize.Model {
           allowNull: false,
           primaryKey: true
         },
-        user_name: {
+        username: {
           type: Sequelize.STRING,
           unique: true,
           allowNull: false
         },
-        display_name: {
+        displayname: {
           type: Sequelize.STRING
         },
         email: {
@@ -28,7 +28,7 @@ export default class User extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false
         },
-        user_token: {
+        userToken: {
           type: Sequelize.STRING
         },
       },
