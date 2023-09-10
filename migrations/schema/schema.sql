@@ -18,12 +18,12 @@ CREATE TABLE users.users (
 );
 
 CREATE TABLE problems.problems (
-  id serial PRIMARY KEY,
+  id character varying(255) PRIMARY KEY,
   name varchar,
-  userId integer,
+  createdBy character varying(255),
   creatorNote varchar,
-  routePath varchar,
-  weight integer,
+  route varchar,
+  weight varchar,
   created_at timestamp,
   updated_at timestamp
 );

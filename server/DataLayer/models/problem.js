@@ -14,17 +14,21 @@ export default class Problem extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false
         },
-        userId: {
+        createdBy: {
           type: Sequelize.UUID,
           allowNull: false
         },
-        routePath: {
+        route: {
           type: Sequelize.ARRAY(DataTypes.STRING),
           allowNull: false
         },
         weight: {
           type: Sequelize.STRING,
           allowNull: false
+        },
+        creatorNote: {
+          type: Sequelize.STRING,
+          allowNull: true
         }
       },
       {
