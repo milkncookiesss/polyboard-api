@@ -22,6 +22,7 @@ async function createProblem(userId, route, weight, grade, name, creatorNote) {
   try {
     await Problem.create(problem)
   } catch(err) {
+    console.error(err);
     throw err;
   }
 
