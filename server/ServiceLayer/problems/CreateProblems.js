@@ -12,6 +12,9 @@ function createProblem() {
     // let testPath = [];
     try{
       const problem = await DB.createProblem(userId, route, weight, grade, name,creatorNote);
+      console.log('-------------------------------');
+      console.log(problem);
+      console.log('-------------------------------');
       res.send({ problem: problem }).status(200);
       next();
     } catch (err) {
