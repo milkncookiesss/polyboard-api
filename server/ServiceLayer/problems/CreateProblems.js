@@ -8,10 +8,10 @@ function createProblem() {
   return async (req, res, next) => {
     console.log(req.body);
     const { userId, name="", routePath, creatorNote="", weight="", grade="" } = req.body;
-    console.log('-------> ', typeof route);
+    console.log('-------> ', typeof routePath);
     // let testPath = [];
     try{
-      const problem = await DB.createProblem(userId, route, weight, grade, name,creatorNote);
+      const problem = await DB.createProblem(userId, routePath, weight, grade, name,creatorNote);
       console.log('-------------------------------');
       console.log(problem);
       console.log('-------------------------------');
