@@ -7,7 +7,7 @@ function getAllProblems() {
     try {
       const allProblems = await DB.getAllProblems();
   
-      res.send({ problems: allProblems }).status(200);
+      res.send(allProblems).status(200);
       next();
     } catch(err) {
       throw err;
