@@ -7,10 +7,11 @@ function getAllProblems() {
     try {
       const allProblems = await DB.getAllProblems();
   
-      res.send(allProblems).status(200);
+      res.send({ problems: allProblems }).status(200);
       next();
     } catch(err) {
-      
+      throw err;
+      res.send("could not find problems").status(500);
     }
   }
 }
