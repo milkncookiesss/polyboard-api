@@ -20,8 +20,8 @@ CREATE TABLE users.users (
 CREATE TABLE problems.problems (
   id character varying(255) PRIMARY KEY,
   name varchar,
-  createdBy character varying(255),
-  creatorNote varchar,
+  created_by character varying(255),
+  creator_note varchar,
   route varchar,
   weight varchar,
   created_at timestamp,

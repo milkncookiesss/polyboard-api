@@ -1,7 +1,7 @@
 import * as DB from '../../DataLayer/Services/problems/GetProblems.js';
 
 
-function getProblems() {
+function getAllProblems() {
   return async (req, res, next) => {
     console.log("we're hitting this service controller i think");
     try {
@@ -16,4 +16,4 @@ function getProblems() {
 }
 
 
-export { getProblems };
+export { getAllProblems };

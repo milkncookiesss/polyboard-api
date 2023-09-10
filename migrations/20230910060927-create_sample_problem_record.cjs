@@ -12,7 +12,7 @@ module.exports = {
         {
           id: uuid(),
           name: 'admin route bb',
-          createdby: '9985174d-117a-4185-9077-70ac123dc050',
+          created_by: '9985174d-117a-4185-9077-70ac123dc050',
           route: [
             'c-J_a3_a',
             'c-Box_a11_a',
@@ -23,7 +23,7 @@ module.exports = {
             'c-E_a6_a'
             ],
           weight: '15lb',
-          creatornote: 'the best route you will ever see',
+          creator_note: 'the best route you will ever see',
           created_at: now,
           updated_at: now
         }

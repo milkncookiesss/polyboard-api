@@ -1,7 +1,7 @@
 import db from '../../models/index.js';
-import problems from '../../../MockProblems/MockProblems.js';
+// import problems from '../../../MockProblems/MockProblems.js';
 
-const Problems = db.Problem;
+const Problem = db.Problem;
 const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
@@ -9,7 +9,16 @@ const Op = Sequelize.Op;
  * Get All Problems by userId
  */
 async function getAllProblems(offset, limit) {
-  return problems;
+  console.log('hello in data layer');
+  
+  try {
+    const problems = await Problem.findAll({ order: [["createdAt", "DESC"]], raw: true });
+    return problems;
+    // return Problem.findAll({ order: [["createdAt", "DESC"]], raw: true });
+  } catch(err) {
+    throw err;
+  }
+  // return problems;
   // return Problem.findAll({
   //   where: {
   //     userId
