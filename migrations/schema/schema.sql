@@ -8,9 +8,9 @@ CREATE TABLE public.SequelizeMeta (
 
 CREATE TABLE users.users (
   id character varying(255) PRIMARY KEY,
-  username varchar,
+  username varchar unique,
   displayname varchar,
-  email varchar,
+  email varchar unique,
   password varchar,
   user_token varchar,
   created_at timestamp,
