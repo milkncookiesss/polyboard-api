@@ -20,10 +20,10 @@ CREATE TABLE users.users (
 CREATE TABLE problems.problems (
   id character varying(255) PRIMARY KEY,
   name varchar,
-  createdBy integer,
+  createdBy character varying(255),
   creatorNote varchar,
   route varchar,
-  weight integer,
+  weight varchar,
   created_at timestamp,
   updated_at timestamp
 );
