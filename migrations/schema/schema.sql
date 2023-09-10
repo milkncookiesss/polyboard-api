@@ -22,7 +22,7 @@ CREATE TABLE problems.problems (
   name varchar,
   created_by character varying(255),
   creator_note varchar,
-  route varchar,
+  route text[],
   weight varchar,
   created_at timestamp,
   updated_at timestamp
