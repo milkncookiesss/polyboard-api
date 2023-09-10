@@ -7,23 +7,23 @@ CREATE TABLE public.SequelizeMeta (
 );
 
 CREATE TABLE users.users (
-  "id" character varying(255) PRIMARY KEY,
-  "username" varchar,
-  "displayname" varchar,
-  "email" varchar,
-  "password" varchar,
-  "user_token" varchar,
-  "created_at" timestamp,
-  "updated_at" timestamp
+  id character varying(255) PRIMARY KEY,
+  username varchar,
+  displayname varchar,
+  email varchar,
+  password varchar,
+  user_token varchar,
+  created_at timestamp,
+  updated_at timestamp
 );
 
 CREATE TABLE problems.problems (
-  "id" serial PRIMARY KEY,
-  "name" varchar,
-  "createdByUser" integer,
-  "creatorNote" varchar,
-  "routePath" varchar,
-  "weight" integer,
-  "created_at" timestamp,
-  "updated_at" timestamp
+  id serial PRIMARY KEY,
+  name varchar,
+  userId integer,
+  creatorNote varchar,
+  routePath varchar,
+  weight integer,
+  created_at timestamp,
+  updated_at timestamp
 );

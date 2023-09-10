@@ -5,18 +5,17 @@ export default class Problem extends Sequelize.Model {
     return super.init(
       {
         id: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.UUID,
           primaryKey: true,
           unique: true,
-          autoIncrement: true,
           allowNull: false
         },
         name: {
           type: Sequelize.STRING,
           allowNull: false
         },
-        createdBy: {
-          type: Sequelize.INTEGER,
+        userId: {
+          type: Sequelize.UUID,
           allowNull: false
         },
         routePath: {

@@ -7,7 +7,8 @@ export default class User extends Sequelize.Model {
         id: {
           type: DataTypes.UUID,
           unique: true,
-          allowNull: false
+          allowNull: false,
+          primaryKey: true
         },
         user_name: {
           type: Sequelize.STRING,
