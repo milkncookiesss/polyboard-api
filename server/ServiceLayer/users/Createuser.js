@@ -11,6 +11,10 @@ function createUser() {
     const { email, password } = req.body;
     const emailExists = await validateEmailUsed(email);
     const hashedPassword = await createPasswordHash(password);
+    console.log("=================================");
+    console.log(email);
+    console.log(hashedPassword);
+    console.log("=================================");
     let newUser = {};
     
     if (emailExists) {
@@ -19,7 +23,7 @@ function createUser() {
       return next();
     }
     try {
-      newUser = await DB.CreateUser(res, email, hashedPassword);
+      newUser = await DB.CreateUser(email, hashedPassword);
     } catch(err) {
       res.status(500).send(err);
       return next();

@@ -19,7 +19,7 @@ async function ValidateUserEmailExists(email) {
 /**
  *
 */
-async function CreateUser(res, email, password) {
+async function CreateUser(email, password) {
   const id = uuid();
   const username = "PolyboardUser" + generateTempUserName(8);
   return await User.create(
