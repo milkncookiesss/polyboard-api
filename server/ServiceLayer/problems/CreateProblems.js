@@ -6,15 +6,9 @@ import * as DB from '../../DataLayer/Services/problems/CreateProblems.js';
 */
 function createProblem() {
   return async (req, res, next) => {
-    console.log(req.body);
     const { createdBy, name="", route, creatorNote="", weight="", grade="" } = req.body;
-    console.log('-------> ', typeof route);
-    // let testPath = [];
     try{
       const problem = await DB.createProblem(createdBy, route, weight, grade, name,creatorNote);
-      console.log('-------------------------------');
-      console.log(problem);
-      console.log('-------------------------------');
       res.send({ problem: problem }).status(200);
       next();
     } catch (err) {
