@@ -1,24 +1,24 @@
 import db from '../../models/index.js';
 
 const User = db.User;
+const Problem = db.Problem;
 const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 // -------------------------------------------------------------------------- //
 /**
- * Get user emails
 */
-async function checkUserEmailExists(email) {
-  return await User.findOne({ attributes: ['id'], where: { email } });
+async function DeleteUser(id) {
+  return await User.destroy({ where: { id }});
 }
+
 // -------------------------------------------------------------------------- //
 /**
 */
-async function GetUserInfo(id) {
-  return await User.findOne({ where: { id }});
+async function DeleteUserProblems(createdBy) {
+  return await Problem.destroy({ where: { createdBy }});
 }
-
 export { 
-  checkUserEmailExists,
-  GetUserInfo
+  DeleteUser,
+  DeleteUserProblems
 };
