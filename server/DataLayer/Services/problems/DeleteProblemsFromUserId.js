@@ -7,8 +7,18 @@ const Op = Sequelize.Op;
 // -------------------------------------------------------------------------- //
 /**
 */
-async function DeleteProblemsFromUserId() {
-
+async function DeleteProblemsFromUserId(createdBy, id) {
+  return await Problem.destroy({ where: { id, createdBy }});
 }
 
-export { DeleteProblemsFromUserId };
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function GetProblemInfo(id) {
+  return await Problem.findOne( { where: { id } } );
+}
+
+export { 
+  DeleteProblemsFromUserId,
+  GetProblemInfo
+};

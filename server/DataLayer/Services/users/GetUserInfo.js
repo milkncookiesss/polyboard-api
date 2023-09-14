@@ -11,6 +11,7 @@ const Op = Sequelize.Op;
 async function checkUserEmailExists(email) {
   return await User.findOne({ attributes: ['id'], where: { email } });
 }
+
 // -------------------------------------------------------------------------- //
 /**
 */
