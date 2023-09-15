@@ -1,16 +1,16 @@
-import { DeleteProblemsFromUserId } from "../../DataLayer/Services/problems/DeleteProblemsFromUserId.js";
-import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo.js";
+import { CreateSend } from "../../DataLayer/Services/problems/CreateSend.js";
 import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
+import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo.js";
 
 // -------------------------------------------------------------------------- //
 /**
 */
-function deleteProblemsFromUserById() {
+function createSend() {
   return async (req, res, next) => {
-    const { userId, problemId } = req.body;
-
+    const { userId, problemId, note, rating, grade } = req.body;
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);
+
     if (!userExists) {
       res.status(404).send({ message: "user not found" });
       return next();
@@ -21,13 +21,14 @@ function deleteProblemsFromUserById() {
     }
 
     try {
-      await DeleteProblemsFromUserId(userId, problemId);
-      res.status(200).send(true);
+      const send = await CreateSend(userId, problemId, note, rating, grade);
+      res.status(200).send({ send });
       next();
     } catch(err) {
-      res.status(500).send(err);
-      next()
+      console.error("could not create send");
+      res.status(500).send(err.message);
       throw err;
+      next();
     }
   }
 }
@@ -59,5 +60,4 @@ async function checkProblemExists(problemId) {
 
   return problemExists;
 }
-
-export { deleteProblemsFromUserById };
+export { createSend }
