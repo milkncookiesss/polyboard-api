@@ -8,7 +8,7 @@ function createProblem() {
   return async (req, res, next) => {
     const { createdBy, name="", route, creatorNote="", weight="", grade="" } = req.body;
     try{
-      const problem = await DB.createProblem(createdBy, route, weight, grade, name,creatorNote);
+      const problem = await DB.createProblem(createdBy, route, weight, grade, name, creatorNote);
       res.send({ problem: problem }).status(200);
       next();
     } catch (err) {

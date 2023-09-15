@@ -3,7 +3,6 @@ import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
 
 function getProblemsByUser() {
   return async (req, res, next) => {
-    console.log("we're hitting this service controller i think");
     const { userId } = req.body;
     const userExists = await checkUserExists(userId);
     

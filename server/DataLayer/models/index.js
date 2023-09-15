@@ -26,6 +26,7 @@ const env = process.env.NODE_ENV || 'development';
 
 import User from './user.js';
 import Problem from './problem.js';
+import Send from './send.js';
 
 let sequelize;
 if (process.env.DATABASE_URL) {
@@ -65,7 +66,8 @@ if (process.env.DATABASE_URL) {
 
 const models = {
   User: User.init(sequelize, Sequelize),
-  Problem: Problem.init(sequelize, Sequelize)
+  Problem: Problem.init(sequelize, Sequelize),
+  Send: Send.init(sequelize, Sequelize)
 }
 // fs
 //   .readdirSync(__dirname)
