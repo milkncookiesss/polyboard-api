@@ -1,13 +1,15 @@
-import { CreateSend } from "../../DataLayer/Services/problems/CreateSend.js";
+import { DeleteSend } from "../../DataLayer/Services/sends/DeleteSend.js";
+import { GetSendInfo } from "../../DataLayer/Services/sends/GetSendInfo.js"
 import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo.js";
 
 // -------------------------------------------------------------------------- //
 /**
 */
-function createSend() {
+function DeleteSend() {
   return async (req, res, next) => {
-    const { userId, problemId, note, rating, grade } = req.body;
+    const { userId, problemId, id } = req.body;
+    const sendExists = await checkSendExists(id);
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);
 
@@ -19,17 +21,22 @@ function createSend() {
       res.status(404).send({ message: "problem not found" });
       return next();
     }
+    if (!sendExists) {
+      res.status(404).send({ message: "send not found" });
+      return next();
+    }
 
     try {
-      const send = await CreateSend(userId, problemId, note, rating, grade);
-      res.status(200).send({ send });
+      await DeleteSend(userId, id);
+      res.status(200).send(true);
       next();
-    } catch(err) {
-      console.error("could not create send");
-      res.status(500).send(err.message);
-      throw err;
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({ message: "Could not delete send" });
       next();
+      throw err
     }
+
   }
 }
 
@@ -60,4 +67,19 @@ async function checkProblemExists(problemId) {
 
   return problemExists;
 }
-export { createSend }
+
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function checkSendExists(sendId) {
+  const sendInfo = await GetSendInfo(sendId);
+  let sendExists = false;
+
+  if (sendInfo) {
+    sendExists = true;
+  }
+  
+  return sendExists;
+}
+
+export { DeleteSend };

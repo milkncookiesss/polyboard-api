@@ -18,7 +18,15 @@ async function DeleteUser(id) {
 async function DeleteUserProblems(createdBy) {
   return await Problem.destroy({ where: { createdBy }});
 }
+
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function DeleteUserSends(userId) {
+  return await Send.destroy({ where: { userId }});
+}
 export { 
   DeleteUser,
-  DeleteUserProblems
+  DeleteUserProblems,
+  DeleteUserSends
 };

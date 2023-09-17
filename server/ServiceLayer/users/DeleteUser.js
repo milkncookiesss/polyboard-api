@@ -20,6 +20,7 @@ function deleteUser() {
     try {
       await DB.DeleteUser(userId);
       await DB.DeleteUserProblems(userId);
+      await DB.DeleteUserSends(userId);
       res.status(200).send({});
       next();
     } catch(err) {

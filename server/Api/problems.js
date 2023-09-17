@@ -3,7 +3,7 @@ import { getAllProblems } from "../ServiceLayer/problems/GetProblems.js";
 import { createProblem } from "../ServiceLayer/problems/CreateProblems.js";
 import { getProblemsByUser } from "../ServiceLayer/problems/GetProblemsByUser.js";
 import { deleteProblemsFromUserById } from "../ServiceLayer/problems/DeleteProblemsFromUserId.js"
-import { createSend } from "../ServiceLayer/problems/CreateSend.js";
+import { createSend } from "../ServiceLayer/sends/CreateSend.js";
 
 const problemsRouter = Router();
 
