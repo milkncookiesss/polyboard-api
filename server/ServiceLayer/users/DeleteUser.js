@@ -19,9 +19,7 @@ function deleteUser() {
     }
     try {
       await DB.DeleteUser(userId);
-      await DB.DeleteUserProblems(userId);
-      await DB.DeleteUserSends(userId);
-      res.status(200).send({});
+      res.status(200).send(true);
       next();
     } catch(err) {
       res.status(500).send({ message: "could not delete user" });

@@ -6,10 +6,10 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 // -------------------------------------------------------------------------- //
 /**
 */
-function DeleteSend() {
+function deleteSend() {
   return async (req, res, next) => {
-    const { userId, problemId, id } = req.body;
-    const sendExists = await checkSendExists(id);
+    const { userId, problemId, sendId } = req.body;
+    const sendExists = await checkSendExists(sendId);
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);
 
@@ -27,7 +27,7 @@ function DeleteSend() {
     }
 
     try {
-      await DeleteSend(userId, id);
+      await DeleteSend(sendId, userId, problemId);
       res.status(200).send(true);
       next();
     } catch (err) {
@@ -82,4 +82,4 @@ async function checkSendExists(sendId) {
   return sendExists;
 }
 
-export { DeleteSend };
+export { deleteSend };

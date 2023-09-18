@@ -6,7 +6,7 @@ const Sequelize = db.Sequelize;
 // -------------------------------------------------------------------------- //
 /**
 */
-async function DeleteSend(id) {
+async function DeleteSend(id, userId, problemId) {
   return await Send.destroy({ where: { id, userId, problemId }});
 }
 
