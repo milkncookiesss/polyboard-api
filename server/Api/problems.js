@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getAllProblems } from "../ServiceLayer/problems/GetProblems.js";
 import { getAllUserSends } from "../ServiceLayer/sends/GetAllUserSends.js";
+import { getProblemById } from "../ServiceLayer/problems/GetProblemById.js";
 import { getProblemsByUser } from "../ServiceLayer/problems/GetProblemsByUser.js";
 import { createSend } from "../ServiceLayer/sends/CreateSend.js";
 import { createProblem } from "../ServiceLayer/problems/CreateProblems.js";
@@ -12,6 +13,7 @@ const problemsRouter = Router();
 problemsRouter.get("/problems/getProblems", getAllProblems());
 problemsRouter.get("/problems/getProblemsFromUser", getProblemsByUser());
 problemsRouter.get("/problems/getAllUserSends", getAllUserSends());
+problemsRouter.get("/problems/getProblemById", getProblemById());
 problemsRouter.post("/problems/createProblem", createProblem());
 problemsRouter.post("/problems/createSend", createSend());
 problemsRouter.delete("/problems/deleteProblem", deleteProblemsFromUserById());
