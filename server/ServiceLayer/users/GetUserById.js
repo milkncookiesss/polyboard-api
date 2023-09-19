@@ -10,7 +10,7 @@ function getUserById() {
     user = await GetUserInfo(userId);
 
     if (!user) {
-      res.status(404).send({ user: {} });
+      res.status(404).send({});
       return next();
     }
     res.status(200).send({ user });

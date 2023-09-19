@@ -16,7 +16,7 @@ async function checkUserEmailExists(email) {
 /**
 */
 async function GetUserInfo(id) {
-  return await User.findOne({ where: { id }});
+  return await User.findOne({ where: { id }, raw: true });
 }
 
 export { 
