@@ -8,9 +8,19 @@ function getUserById() {
     const { userId } = req.body;
     console.log("==========================================")
     console.log(userId);
+    console.log(req.body);
     console.log("==========================================")
+    if (!userId) {
+      res.status(400).send({ message: "Bad Request" });
+      return next();
+    }
     let user = null;
-    user = await GetUserInfo(userId);
+    try {
+      user = await GetUserInfo(userId);
+    } catch(err) {
+      res.status(500).send({ message: "server err" })
+      return next();
+    }
 
     if (!user) {
       res.status(404).send({ user: {} });

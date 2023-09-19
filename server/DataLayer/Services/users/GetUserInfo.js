@@ -16,7 +16,12 @@ async function checkUserEmailExists(email) {
 /**
 */
 async function GetUserInfo(id) {
-  return await User.findOne({ where: { id }});
+  try {
+    return await User.findOne({ where: { id }});
+  } catch(err) {
+    console.error(err);
+    throw err;
+  }
 }
 
 export { 
