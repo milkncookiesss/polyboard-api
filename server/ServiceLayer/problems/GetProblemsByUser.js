@@ -3,7 +3,7 @@ import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
 
 function getProblemsByUser() {
   return async (req, res, next) => {
-    const { userId } = req.body;
+    const { userId } = req.query;
     const userExists = await checkUserExists(userId);
     
     if (!userExists) {
