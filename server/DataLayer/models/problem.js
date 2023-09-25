@@ -29,6 +29,10 @@ export default class Problem extends Sequelize.Model {
         creatorNote: {
           type: Sequelize.STRING,
           allowNull: true
+        },
+        averageRating: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0
         }
       },
       {
