@@ -9,8 +9,12 @@ function createReport() {
     console.log('inside create report service');
     try {
       await CreateReport(reportType, reporter, comment);
+      res.status(200).send(true);
+      next();
     } catch (err) {
-
+      console.error(err);
+      res.status(500).send(err.message);
+      next();
     }
   }
 }
