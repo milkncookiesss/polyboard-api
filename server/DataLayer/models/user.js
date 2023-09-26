@@ -31,6 +31,10 @@ export default class User extends Sequelize.Model {
         userToken: {
           type: Sequelize.STRING
         },
+        hidden: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
+        }
       },
       {
         sequelize,
