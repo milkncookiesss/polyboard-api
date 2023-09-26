@@ -15,6 +15,10 @@ export default class Report extends Sequelize.Model {
         reportType: {
           type: DataTypes.STRING
         },
+        reportedId: {
+          type: DataTypes.UUID,
+          allowNull: false
+        },
         comment: {
           type: DataTypes.STRING
         }
