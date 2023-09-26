@@ -26,6 +26,10 @@ export default class Send extends Sequelize.Model {
         },
         note: {
           type: Sequelize.STRING
+        },
+        hidden: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
         }
       },
       {
