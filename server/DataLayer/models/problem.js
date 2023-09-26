@@ -33,6 +33,9 @@ export default class Problem extends Sequelize.Model {
         averageRating: {
           type: Sequelize.INTEGER,
           defaultValue: 0
+        },
+        grade: {
+          type: Sequelize.STRING
         }
       },
       {
