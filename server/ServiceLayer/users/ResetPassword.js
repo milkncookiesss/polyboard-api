@@ -9,6 +9,7 @@ function sendPasswordResetLink() {
   return async (req, res, next) => {
     const { userEmail } = req.body;
     const userExists = await CheckUserExists(userEmail);
+    const passwordResetCode = PasswordResetCodeGenerator();
 
     if (!userExists) {
       res.status(404).send({ message: "user does not exist" });
@@ -31,10 +32,10 @@ function sendPasswordResetLink() {
         to: userEmail,
         subject: 'Polyboard Password Reset',
         text: `<b>Hello this is an automated email to reset your password.</b>
-        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a hfref="fingerclimbing://">here</a></br>`,
+        <br>Enter this code in the app to be able to reset your password: ${passwordResetCode}</br>`,
         html: `
         <b>Hello this is an automated email to reset your password.</b>
-        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a href="fingerclimbing://">here</a></br>`,
+        <br>Enter this passwordResetCode in the app to be able to reset your password: ${passwordResetCode}</br>`,
       };
   
       const info = await transporter.sendMail(mailData);
@@ -55,6 +56,19 @@ async function CheckUserExists(email) {
     return false;
   }
   return true;
+}
+
+function PasswordResetCodeGenerator() {
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let code = '';
+  const length = 8;
+
+  for (let i = 0; i < length; i++) {
+    let randomIndex = Math.floor(Math.random() * chars.length);
+    code += chars[randomIndex];
+  }
+
+  return code;
 }
 
 export { sendPasswordResetLink }

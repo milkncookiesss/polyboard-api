@@ -18,6 +18,7 @@ import User from './user.js';
 import Problem from './problem.js';
 import Send from './send.js';
 import Report from './report.js';
+import Passwordresetcode from './passwordresetcode.js';
 
 let sequelize;
 if (process.env.DATABASE_URL) {
@@ -58,7 +59,8 @@ const models = {
   User: User.init(sequelize, Sequelize),
   Problem: Problem.init(sequelize, Sequelize),
   Send: Send.init(sequelize, Sequelize),
-  Report: Report.init(sequelize, Sequelize)
+  Report: Report.init(sequelize, Sequelize),
+  Passwordresetcode: Passwordresetcode.init(sequelize, Sequelize)
 }
 
 Object.values(models)
