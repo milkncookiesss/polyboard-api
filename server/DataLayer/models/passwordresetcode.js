@@ -6,6 +6,7 @@ export default class Passwordresetcode extends Sequelize.Model {
       {
         email: {
           type: DataTypes.STRING,
+          primaryKey: true,
           allowNull: false
         },
         code: {
@@ -17,7 +18,8 @@ export default class Passwordresetcode extends Sequelize.Model {
         sequelize,
         timestamps: true,
         schema: 'users',
-        tableName: 'passwordresetcode'
+        tableName: 'passwordresetcode',
+        underscored: true
       }
     )
   }
