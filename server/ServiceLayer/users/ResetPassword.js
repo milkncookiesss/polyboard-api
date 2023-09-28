@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { GetUserInfoByEmail } from '../../DataLayer/Services/users/GetUserInfo.js';
+import { CreatePasswordResetCodeRecord } from '../../DataLayer/Services/users/ResetPassword.js';
 const hostEmail = process.env.HOST_EMAIL;
 const emailPassword = process.env.HOST_EMAIL_PASSWORD;
 const emailPort = process.env.GMAIL_PORT;
@@ -16,6 +17,7 @@ function sendPasswordResetLink() {
       return next();
     }
     try {
+      await CreatePasswordResetCodeRecord(userEmail, passwordResetCode);
       const transporter = nodemailer.createTransport({
         port: emailPort,
         host: emailHost,
@@ -32,10 +34,10 @@ function sendPasswordResetLink() {
         to: userEmail,
         subject: 'Polyboard Password Reset',
         text: `<b>Hello this is an automated email to reset your password.</b>
-        <br>Enter this code in the app to be able to reset your password: ${passwordResetCode}</br>`,
+        <br>Enter this code in the app to be able to reset your password: <b>${passwordResetCode}</b></br>`,
         html: `
         <b>Hello this is an automated email to reset your password.</b>
-        <br>Enter this passwordResetCode in the app to be able to reset your password: ${passwordResetCode}</br>`,
+        <br>Enter this passwordResetCode in the app to be able to reset your password: <b>${passwordResetCode}</b></br>`,
       };
   
       const info = await transporter.sendMail(mailData);

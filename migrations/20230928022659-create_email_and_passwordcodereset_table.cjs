@@ -11,11 +11,18 @@ module.exports = {
       {
         email: {
           type: Sequelize.STRING,
+          primaryKey: true,
           allowNull: false
         },
         code: {
           type: Sequelize.STRING,
           allowNull: false
+        },
+        created_at: {
+          type: Sequelize.DATE
+        },
+        updated_at: {
+          type: Sequelize.DATE
         }
       }
     )
