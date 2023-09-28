@@ -31,10 +31,10 @@ function sendPasswordResetLink() {
         to: userEmail,
         subject: 'Polyboard Password Reset',
         text: `<b>Hello this is an automated email to reset your password.</b>
-        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a hfref="https://polyboard-api-1b8900100f27.herokuapp.com/api/deeplink?url=fingerclimbing://forgetpassword/">here</a></br>`,
+        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a hfref="https://polyboard-api-1b8900100f27.herokuapp.com/api/deeplink?url=fingerclimbing://">here</a></br>`,
         html: `
         <b>Hello this is an automated email to reset your password.</b>
-        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a href="https://polyboard-api-1b8900100f27.herokuapp.com/api/deeplink?url=fingerclimbing://forgetpassword/">here</a></br>`,
+        <br>Please use this link to enter back into the Polyboard App and continue the process to reset your password: <a href="https://polyboard-api-1b8900100f27.herokuapp.com/api/deeplink?url=fingerclimbing://">here</a></br>`,
       };
   
       const info = await transporter.sendMail(mailData);
