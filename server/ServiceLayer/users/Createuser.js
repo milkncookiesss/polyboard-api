@@ -46,8 +46,6 @@ async function createPasswordHash(password) {
     console.error(err);
     throw err;
   }
-
-
 }
 
 async function validateEmailUsed(email) {
