@@ -6,7 +6,12 @@ const Op = Sequelize.Op;
 
 async function CreatePasswordResetCodeRecord(email, code) {
   try {
-    await Passwordresetcode.create( { email, code });
+    const resetRecord = await Passwordresetcode.findOne({ where: { email }});
+    if (resetRecord) {
+      await Passwordresetcode.update( { code }, { where: { email }});
+    } else {
+      await Passwordresetcode.create( { email, code });
+    }
   } catch (err) {
     console.error(err);
     throw err;

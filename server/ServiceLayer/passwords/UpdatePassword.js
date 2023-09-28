@@ -24,8 +24,6 @@ function updatePassword() {
         ]
       );
       
-      
-      //delete code records
       res.status(200).send({ message: 'password updated' });
       next();
     } catch (err) {
