@@ -19,6 +19,7 @@ import Problem from './problem.js';
 import Send from './send.js';
 import Report from './report.js';
 import Passwordresetcode from './passwordresetcode.js';
+import BlockList from './blocklist.js';
 
 let sequelize;
 if (process.env.DATABASE_URL) {
@@ -60,7 +61,8 @@ const models = {
   Problem: Problem.init(sequelize, Sequelize),
   Send: Send.init(sequelize, Sequelize),
   Report: Report.init(sequelize, Sequelize),
-  Passwordresetcode: Passwordresetcode.init(sequelize, Sequelize)
+  Passwordresetcode: Passwordresetcode.init(sequelize, Sequelize),
+  BlockList: BlockList.init(sequelize, Sequelize)
 }
 
 Object.values(models)
