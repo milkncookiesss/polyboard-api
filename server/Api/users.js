@@ -4,12 +4,14 @@ import { loginUser } from "../ServiceLayer/users/LoginUser.js";
 import { deleteUser } from "../ServiceLayer/users/DeleteUser.js";
 import { logOutUser } from "../ServiceLayer/users/LogOutUser.js";
 import { getUserById } from "../ServiceLayer/users/GetUserById.js";
+import { sendPasswordResetLink } from "../ServiceLayer/users/ResetPassword.js";
 const usersRouter = Router();
 
 usersRouter.get("/users/getUserById", getUserById());
 usersRouter.post("/users/signUp", createUser());
 usersRouter.post("/users/login", loginUser());
 usersRouter.post("/users/logout", logOutUser());
+usersRouter.post("/users/resetPassword", sendPasswordResetLink());
 usersRouter.delete("/users/delete", deleteUser());
 
 

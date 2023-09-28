@@ -24,7 +24,17 @@ async function GetUserInfo(id) {
   }
 }
 
+async function GetUserInfoByEmail(email) {
+  try {
+    return await User.findOne({ where: { email }});
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 export { 
   checkUserEmailExists,
-  GetUserInfo
+  GetUserInfo,
+  GetUserInfoByEmail
 };
