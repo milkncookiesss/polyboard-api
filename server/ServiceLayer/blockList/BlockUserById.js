@@ -1,27 +1,31 @@
-import { GetUserBlockListById } from "../../DataLayer/Services/blockList/GetUserBlockList.js";
+import { BlockUserById } from "../../DataLayer/Services/blockList/BlockUserById.js";
 import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
-
 // -------------------------------------------------------------------------- //
 /**
 */
-function getUserBlockList() {
+function blockUser() {
   return async (req, res, next) => {
-    console.log('yo dawg we in the service for getting an user block list')
-    const { userId } = req.query;
+    console.log('blocking user inside service layer');
+    const { userId, blockedUserId } = req.body;
     const userExists = await ValidateUserExists(userId);
+    const blockedUserExists = await ValidateUserExists(blockedUserId);
 
     if (!userExists) {
       res.status(404).send({ message: "user does not exist" });
       return next();
     }
+    if (!blockedUserExists) {
+      res.status(404).send({ message: "blocked user does not exist" });
+      return next();
+    }
 
     try {
-      const blockList = await GetUserBlockListById(userId);
-      res.status(200).send({ blockList });
+      await BlockUserById(userId, blockedUserId);
+      res.status(200).send({ message: "successfully blocked user" });
       next();
     } catch (err) {
       console.error(err);
-      res.status(500).send({ message: "could not get block list" });
+      res.status(500).send({ message: "could not block user" });
       next();
       throw new Error(err);
     }
@@ -42,4 +46,4 @@ async function ValidateUserExists(userId) {
   return userExists;
 }
 
-export { getUserBlockList }
+export { blockUser }
