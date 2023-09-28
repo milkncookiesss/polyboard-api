@@ -8,6 +8,7 @@ import { sendPasswordResetLink } from "../ServiceLayer/passwords/ResetPassword.j
 import { updatePassword } from "../ServiceLayer/passwords/UpdatePassword.js";
 import { getUserBlockList } from "../ServiceLayer/blockList/GetUserBlockList.js";
 import { blockUser } from "../ServiceLayer/blockList/BlockUserById.js";
+import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js"
 const usersRouter = Router();
 
 usersRouter.get("/users/getUserById", getUserById());
@@ -18,6 +19,7 @@ usersRouter.post("/users/logout", logOutUser());
 usersRouter.post("/users/resetPassword", sendPasswordResetLink());
 usersRouter.post("/users/blockUser", blockUser());
 usersRouter.patch("/users/updatePassword", updatePassword());
+usersRouter.delete("/users/unBlockUser", unBlockUser());
 usersRouter.delete("/users/delete", deleteUser());
 
 
