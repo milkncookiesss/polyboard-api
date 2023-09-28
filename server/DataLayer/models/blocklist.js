@@ -17,7 +17,7 @@ export default class BlockList extends Sequelize.Model {
       {
         sequelize,
         timestamps: true,
-        schema: 'reports',
+        schema: 'users',
         tableName: 'blocklist',
         underscored: true
       }

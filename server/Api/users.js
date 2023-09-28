@@ -6,9 +6,11 @@ import { logOutUser } from "../ServiceLayer/users/LogOutUser.js";
 import { getUserById } from "../ServiceLayer/users/GetUserById.js";
 import { sendPasswordResetLink } from "../ServiceLayer/passwords/ResetPassword.js";
 import { updatePassword } from "../ServiceLayer/passwords/UpdatePassword.js";
+import { getUserBlockList } from "../ServiceLayer/blockList/GetUserBlockList.js";
 const usersRouter = Router();
 
 usersRouter.get("/users/getUserById", getUserById());
+usersRouter.get("/users/getUserBlockList", getUserBlockList());
 usersRouter.post("/users/signUp", createUser());
 usersRouter.post("/users/login", loginUser());
 usersRouter.post("/users/logout", logOutUser());
