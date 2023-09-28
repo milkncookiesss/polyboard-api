@@ -6,10 +6,6 @@ function updatePassword() {
     const { userEmail, password, code } = req.body;
     const hashedPassword = await createPasswordHash(password);
     const resetCodeExists = await ValidateResetCodeExistsForUser(userEmail, code);
-    console.log('hitting serice layer');
-    console.log(userEmail)
-    console.log(hashedPassword)
-    console.log(code)
 
     if (!resetCodeExists) {
       res.status(404).send({ message: 'user provided incorrect code' });
