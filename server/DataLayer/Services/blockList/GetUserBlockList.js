@@ -10,7 +10,8 @@ const Op = Sequelize.Op;
 async function GetUserBlockListById(userId) {
   console.log('yo dog we in the data layer of the get block list')
   try {
-    return await BlockList.findAll({ where: { userId }, raw: true });
+    const blockList = await BlockList.findAll({ where: { userId }, order: [["createdAt", "DESC"]], raw: true });
+    return blockList;
   } catch (err) {
     console.error(err);
     throw err;
