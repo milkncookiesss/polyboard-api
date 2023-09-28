@@ -27,7 +27,7 @@ function blockUser() {
       console.error(err);
       res.status(500).send({ message: "could not block user" });
       next();
-      throw err;
+      throw new Error(err);
     }
   }
 }

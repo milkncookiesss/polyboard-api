@@ -16,14 +16,14 @@ function getUserBlockList() {
     }
 
     try {
-      const blockList = GetUserBlockListById(userId);
+      const blockList = await GetUserBlockListById(userId);
       res.status(200).send({ blockList });
       next();
     } catch (err) {
       console.error(err);
       res.status(500).send({ message: "could not get block list" });
       next();
-      throw err;
+      throw new Error(err);
     }
   }
 }

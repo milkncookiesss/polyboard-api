@@ -9,9 +9,13 @@ module.exports = {
         schema: 'users'
       },
       {
+        id: {
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
+          primaryKey: true
+        },
         user_id: {
           type: Sequelize.UUID,
-          primaryKey: true,
           allowNull: false
         },
         blocked_user_id: {
