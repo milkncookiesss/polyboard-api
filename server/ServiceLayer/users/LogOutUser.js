@@ -1,4 +1,5 @@
 import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
+import { UpdateUserTokenAtLogOut } from '../../DataLayer/Services/users/LogOutUser.js';
 
 // -------------------------------------------------------------------------- //
 /**
@@ -13,6 +14,7 @@ function logOutUser() {
       return next();
     }
 
+    await UpdateUserTokenAtLogOut(userId);
     res.status(200).send({});
     next();
   }
