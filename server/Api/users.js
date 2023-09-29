@@ -8,14 +8,15 @@ import { sendPasswordResetLink } from "../ServiceLayer/passwords/ResetPassword.j
 import { updatePassword } from "../ServiceLayer/passwords/UpdatePassword.js";
 import { getUserBlockList } from "../ServiceLayer/blockList/GetUserBlockList.js";
 import { blockUser } from "../ServiceLayer/blockList/BlockUserById.js";
-import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js"
+import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js";
+import { auth } from "../ServiceLayer/auth/Auth.js";
 const usersRouter = Router();
 
 usersRouter.get("/users/getUserById", getUserById());
 usersRouter.get("/users/getUserBlockList", getUserBlockList());
 usersRouter.post("/users/signUp", createUser());
 usersRouter.post("/users/login", loginUser());
-usersRouter.post("/users/logout", logOutUser());
+usersRouter.post("/users/logout", auth(), logOutUser());
 usersRouter.post("/users/resetPassword", sendPasswordResetLink());
 usersRouter.post("/users/blockUser", blockUser());
 usersRouter.patch("/users/updatePassword", updatePassword());

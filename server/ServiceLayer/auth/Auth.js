@@ -4,7 +4,7 @@ function auth() {
   return async (req, res, next) => {
     const secret = process.env.JWT_SECRET;
     const authHeader = req.headers.authorization;
-    console.log('================> ', authHeader);
+
     const decoded = await JsonWebToken.verify(
       authHeader, 
       secret,

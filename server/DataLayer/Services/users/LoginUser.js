@@ -21,4 +21,27 @@ async function GetUserInfo(email) {
   });
 }
 
-export { GetUserInfo };
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function UpdateUserToken(id, userToken) {
+  return await User.update(
+    { 
+      userToken 
+    }, 
+    { 
+      where: {
+        id 
+      },
+      returning: true,
+      raw: true
+    }
+  )
+  .then(userInfo => userInfo[1][0])
+  .catch((err) => {
+    console.error(err);
+    throw new Error(err);
+  });
+}
+
+export { GetUserInfo, UpdateUserToken };

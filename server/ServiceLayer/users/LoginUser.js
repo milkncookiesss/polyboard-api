@@ -1,6 +1,7 @@
 import bcrypt, { compare } from 'bcrypt';
 import * as DB from '../../DataLayer/Services/users/LoginUser.js';
 import { validateEmail } from '../../Helpers/emailValidation.js';
+import { sign } from '../auth/Auth.js';
 // -------------------------------------------------------------------------- //
 /**
  * 
@@ -27,10 +28,14 @@ function loginUser() {
         res.status(401).send({ message: "incorrect password or email" });
         return next();
       }
-      res.status(200).send(userInfo);
+
+      const token = await sign(userInfo.id, email);
+      const userInfoRes = await DB.UpdateUserToken(userInfo.id, token);
+      res.status(200).send(userInfoRes);
     } catch (err) {
       console.log(err);
       res.status(400).send({ message: "user does not exist" });
+      throw new Error(err);
     }
     next();
   }
