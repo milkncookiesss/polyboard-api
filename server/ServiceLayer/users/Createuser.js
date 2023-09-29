@@ -1,6 +1,7 @@
 import { uuid } from 'uuidv4';
 import bcrypt from 'bcrypt';
 import * as DB from '../../DataLayer/Services/users/CreateUser.js';
+import { sign } from '../auth/Auth.js';
 // -------------------------------------------------------------------------- //
 /**
  * Create User
@@ -11,10 +12,7 @@ function createUser() {
     const { email, password } = req.body;
     const emailExists = await validateEmailUsed(email);
     const hashedPassword = await createPasswordHash(password);
-    console.log("=================================");
-    console.log(email);
-    console.log(hashedPassword);
-    console.log("=================================");
+
     let newUser = {};
     
     if (emailExists) {
@@ -23,7 +21,9 @@ function createUser() {
       return next();
     }
     try {
-      newUser = await DB.CreateUser(email, hashedPassword);
+      const id = uuid();
+      const userToken = await sign(id, email);
+      newUser = await DB.CreateUser(id, email, hashedPassword, userToken);
     } catch(err) {
       res.status(500).send(err);
       return next();
