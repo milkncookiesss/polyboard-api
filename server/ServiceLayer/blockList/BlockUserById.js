@@ -6,7 +6,8 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 function blockUser() {
   return async (req, res, next) => {
     console.log('blocking user inside service layer');
-    const { userId, blockedUserId } = req.body;
+    const { userId } = req.body.user;
+    const { blockedUserId } = req.body;
     const userExists = await ValidateUserExists(userId);
     const blockedUserExists = await ValidateUserExists(blockedUserId);
 

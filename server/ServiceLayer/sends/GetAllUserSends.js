@@ -6,7 +6,7 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 */
 function getAllUserSends() {
   return async (req, res, next) => {
-    const { userId } = req.query;
+    const { userId } = req.query
 
     if (userId === "") {
       res.status(400).send({ message: "no id was provided" });

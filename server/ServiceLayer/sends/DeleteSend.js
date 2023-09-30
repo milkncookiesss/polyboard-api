@@ -8,7 +8,8 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 */
 function deleteSend() {
   return async (req, res, next) => {
-    const { userId, problemId, sendId } = req.body;
+    const { userId } = req.body.user;
+    const { problemId, sendId } = req.body;
     const sendExists = await checkSendExists(sendId);
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);
