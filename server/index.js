@@ -3,6 +3,7 @@ import express from "express";
 import problemsRouter from './Api/problems.js';
 import usersRouter from './Api/users.js';
 import deepLinkRouter from './Api/deeplink.js';
+import reportsRouter from "./Api/reports.js";
 
 const app = new express();
 
@@ -12,6 +13,7 @@ app
   .use('/api', deepLinkRouter)
   .use('/api', problemsRouter)
   .use('/api', usersRouter)
+  .use('/api', reportsRouter)
   // .get('/test', (req, res) => {
   //   console.log('testing to see if we actually get here');
   //   res.send('hi im here').status(200);
