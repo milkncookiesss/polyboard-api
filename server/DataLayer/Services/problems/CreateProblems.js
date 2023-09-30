@@ -9,7 +9,7 @@ const Sequelize = db.Sequelize;
 /**
  * create problem data layer
 */
-async function createProblem(createdBy, route, weight, grade, name, creatorNote) {
+async function createProblem(createdBy, route, weight, name, creatorNote) {
   const problemId = uuid();
   const problem = {
     id: problemId,

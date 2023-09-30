@@ -4,7 +4,8 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 
 function unBlockUser() {
   return async (req, res, next) => {
-    const { userId, blockedUserId } = req.body;
+    const { userId } = req.body.user;
+    const { blockedUserId } = req.body;
     const userExists = await ValidateUserExists(userId);
     const blockedUserExists = await ValidateUserExists(blockedUserId);
 

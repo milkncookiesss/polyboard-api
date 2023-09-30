@@ -12,16 +12,16 @@ import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js";
 import { auth } from "../ServiceLayer/auth/Auth.js";
 const usersRouter = Router();
 
-usersRouter.get("/users/getUserById", getUserById());
-usersRouter.get("/users/getUserBlockList", getUserBlockList());
+usersRouter.get("/users/getUserById", auth(), getUserById());
+usersRouter.get("/users/getUserBlockList", auth(), getUserBlockList());
 usersRouter.post("/users/signUp", createUser());
 usersRouter.post("/users/login", loginUser());
 usersRouter.post("/users/logout", auth(), logOutUser());
 usersRouter.post("/users/resetPassword", sendPasswordResetLink());
-usersRouter.post("/users/blockUser", blockUser());
+usersRouter.post("/users/blockUser", auth(), blockUser());
 usersRouter.patch("/users/updatePassword", updatePassword());
-usersRouter.delete("/users/unBlockUser", unBlockUser());
-usersRouter.delete("/users/delete", deleteUser());
+usersRouter.delete("/users/unBlockUser", auth(), unBlockUser());
+usersRouter.delete("/users/delete", auth(), deleteUser());
 
 
 export default usersRouter;

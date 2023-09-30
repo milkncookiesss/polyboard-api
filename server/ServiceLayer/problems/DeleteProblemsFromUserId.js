@@ -7,7 +7,8 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 */
 function deleteProblemsFromUserById() {
   return async (req, res, next) => {
-    const { userId, problemId } = req.body;
+    const { userId } = req.body.user;
+    const { problemId } = req.body;
 
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);

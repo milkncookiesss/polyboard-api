@@ -6,7 +6,7 @@ import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
 */
 function deleteUser() {
   return async (req, res, next) => {
-    const { userId } = req.body;
+    const { userId } = req.body.user;
     if (userId === "") {
       res.status(400).send({ message: "no id was provided" });
       return next();

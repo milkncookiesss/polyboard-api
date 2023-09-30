@@ -7,7 +7,7 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 function getUserBlockList() {
   return async (req, res, next) => {
     console.log('yo dawg we in the service for getting an user block list')
-    const { userId } = req.query;
+    const { userId } = req.body.user;
     const userExists = await ValidateUserExists(userId);
 
     if (!userExists) {
