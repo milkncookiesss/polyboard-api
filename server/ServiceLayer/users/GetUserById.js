@@ -6,11 +6,6 @@ import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
 function getUserById() {
   return async (req, res, next) => {
     const { userId } = req.query;
-    console.log(req.body);
-    console.log("==========================================")
-    console.log(userId);
-    console.log(req.query);
-    console.log("==========================================")
     if (!userId) {
       res.status(400).send({ message: "Bad Request" });
       return next();
