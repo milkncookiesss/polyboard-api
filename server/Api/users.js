@@ -9,9 +9,11 @@ import { updatePassword } from "../ServiceLayer/passwords/UpdatePassword.js";
 import { getUserBlockList } from "../ServiceLayer/blockList/GetUserBlockList.js";
 import { blockUser } from "../ServiceLayer/blockList/BlockUserById.js";
 import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js";
+import { getAllUsers } from "../ServiceLayer/users/GetAllUsers.js";
 import { auth } from "../ServiceLayer/auth/Auth.js";
 const usersRouter = Router();
 
+usersRouter.get("/users/getAllUsers", auth(), getAllUsers());
 usersRouter.get("/users/getUserById", auth(), getUserById());
 usersRouter.get("/users/getUserBlockList", auth(), getUserBlockList());
 usersRouter.post("/users/signUp", createUser());
