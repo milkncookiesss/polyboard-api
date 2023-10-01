@@ -12,7 +12,8 @@ async function GetUserInfo(email) {
     { 
       where: { 
         email
-      }
+      },
+      raw: true
     }
   )
   .then(user => user)
