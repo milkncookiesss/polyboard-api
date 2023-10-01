@@ -5,6 +5,7 @@ function auth() {
   return async (req, res, next) => {
     const secret = process.env.JWT_SECRET;
     const authHeader = req.headers.authorization;
+    console.log('=============> ', authHeader);
     if (authHeader === null || authHeader === "" || !authHeader) {
       res.status(401).send({ message: "no token provided" });
       return;
