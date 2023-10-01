@@ -3,7 +3,8 @@ import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 
 function updateUserInfo() {
   return async (req, res, next) => {
-    const { userId, userName, displayName } = req.body;
+    const { userName, displayName } = req.body;
+    const { userId } = req.body.user;
     const userExists = await CheckUserExists(userId);
     const userNameExists = await UserNameValidator(userName);
 
@@ -28,6 +29,9 @@ function updateUserInfo() {
   }
 }
 
+// -------------------------------------------------------------------------- //
+/**
+*/
 async function UserNameValidator(userName) {
   const userNameExists = await CheckUserNameExists(userName);
   let exists = false;
@@ -39,6 +43,9 @@ async function UserNameValidator(userName) {
   return exists;
 }
 
+// -------------------------------------------------------------------------- //
+/**
+*/
 async function CheckUserExists(userId) {
   const userInfo = await GetUserInfo(userId);
   let userExists = false;

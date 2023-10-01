@@ -12,7 +12,7 @@ import { unBlockUser } from "../ServiceLayer/blockList/UnBlockUserById.js";
 import { getAllUsers } from "../ServiceLayer/users/GetAllUsers.js";
 import { auth } from "../ServiceLayer/auth/Auth.js";
 import { updateUserInfo } from "../ServiceLayer/users/UpdateUserInfo.js";
-import { sendPasswordResetLink } from "../ServiceLayer/users/ResetPassword.js";
+
 const usersRouter = Router();
 
 usersRouter.get("/users/getAllUsers", auth(), getAllUsers());
@@ -26,7 +26,7 @@ usersRouter.post("/users/blockUser", auth(), blockUser());
 usersRouter.patch("/users/updatePassword", updatePassword());
 usersRouter.delete("/users/unBlockUser", auth(), unBlockUser());
 usersRouter.delete("/users/delete", auth(), deleteUser());
-usersRouter.patch("/users/updateUserInfo", updateUserInfo());
+usersRouter.patch("/users/updateUserInfo", auth(), updateUserInfo());
 usersRouter.delete("/users/delete", deleteUser());
 
 
