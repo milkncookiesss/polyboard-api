@@ -29,13 +29,14 @@ function auth() {
       return;
     }
     const userId = decoded.user.id;
+    const role = decoded.user.role;
     const userExists = await checkUserExists(userId);
     if (!userExists) {
       res.status(404).send({ message: "aurthorized user not found" });
       return;
     }
 
-    req.body.user = { userId };
+    req.body.user = { userId, role };
     next();
   }
 }
@@ -43,13 +44,14 @@ function auth() {
 // -------------------------------------------------------------------------- //
 /**
 */
-async function sign(userId, email) {
+async function sign(userId, email, role) {
   const secret = process.env.JWT_SECRET;
 
   const payload = {
     user: {
       id: userId,
-      email
+      email,
+      role
     }
   };
 
