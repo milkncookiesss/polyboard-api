@@ -9,7 +9,6 @@ const Op = Sequelize.Op;
  * Get user emails
 */
 async function checkUserEmailExists(email) {
-  console.log('check email exists in data');
   try {
     const user = await User.findOne({ attributes: ['id'], where: { email } });
     return user;
