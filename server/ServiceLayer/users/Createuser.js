@@ -10,6 +10,8 @@ import { sign } from '../auth/Auth.js';
 function createUser() {
   return async (req, res, next) => {
     const { email, password } = req.body;
+    console.log('inside createUser');
+    console.log(`========= ${ email } =========`)
     const emailExists = await validateEmailUsed(email);
     console.log(emailExists);
     const hashedPassword = await createPasswordHash(password);
