@@ -29,7 +29,7 @@ function loginUser() {
         return next();
       }
 
-      const token = await sign(userInfo.id, email);
+      const token = await sign(userInfo.id, email, userInfo.role);
       const userInfoRes = await DB.UpdateUserToken(userInfo.id, token);
       res.status(200).send(userInfoRes);
     } catch (err) {

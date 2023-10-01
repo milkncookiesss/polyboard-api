@@ -34,6 +34,10 @@ export default class User extends Sequelize.Model {
         hidden: {
           type: Sequelize.BOOLEAN,
           defaultValue: false
+        },
+        role: {
+          type: Sequelize.STRING,
+          defaultValue: 'user'
         }
       },
       {
