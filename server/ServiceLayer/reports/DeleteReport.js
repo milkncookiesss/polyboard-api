@@ -1,4 +1,5 @@
-import { DeleteReportById, GetReportInfo } from "../../DataLayer/Services/reports/DeleteReport.js";
+import { DeleteReportById } from "../../DataLayer/Services/reports/DeleteReport.js";
+import { GetReportById } from "../../DataLayer/Services/reports/GetReportById.js";
 
 // -------------------------------------------------------------------------- //
 /**
@@ -39,7 +40,7 @@ function deleteReport() {
 /**
 */
 async function ValidateReportId(id) {
-  const reportInfo = await GetReportInfo(id);
+  const reportInfo = await GetReportById(id);
   let reportExists = false
   if (reportInfo) {
     reportExists = true;

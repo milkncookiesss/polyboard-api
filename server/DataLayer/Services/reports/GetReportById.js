@@ -6,14 +6,13 @@ const Sequelize = db.Sequelize;
 // -------------------------------------------------------------------------- //
 /**
 */
-async function DeleteReportById(id) {
+async function GetReportById(id) {
   try {
-    return await Report.destroy({ where: { id }});
+    return await Report.findOne({ where: { id }, raw: true });
   } catch (err) {
     console.error(err);
     throw new Error(err);
   }
 }
 
-
-export { DeleteReportById }
+export { GetReportById }
