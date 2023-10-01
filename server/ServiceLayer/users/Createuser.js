@@ -13,13 +13,13 @@ function createUser() {
     console.log('inside createUser');
     console.log(`========= ${ email } =========`)
     const emailExists = await validateEmailUsed(email);
-    console.log(emailExists);
+    console.log('============>', emailExists);
     const hashedPassword = await createPasswordHash(password);
 
     let newUser = {};
     
     if (emailExists) {
-      console.log(emailExists);
+      console.log('inside if of email exists');
       res.status(409).send({ message: "email already exists" });
       return next();
     }
@@ -28,12 +28,14 @@ function createUser() {
       const role = 'user';
       const userToken = await sign(id, email, role);
       newUser = await DB.CreateUser(id, email, hashedPassword, userToken);
+      res.status(200).send(newUser);
+      next();
     } catch(err) {
+      console.error(err);
       res.status(500).send(err);
-      return next();
+      next();
+      throw new Error(err);
     }
-    res.status(200).send(newUser);
-    next();
   }
 }
 
