@@ -6,6 +6,7 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 function getProblemById() {
   return async (req, res, next) => {
     const { problemId } = req.query;
+    console.log('xxxxxxxxxxxxxxx', problemId);
     const problemExists = await checkProblemExists(problemId);
     if (!problemExists) {
       res.status(404).send({ message: "problem not found" });
