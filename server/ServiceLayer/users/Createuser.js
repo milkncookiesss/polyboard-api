@@ -50,6 +50,7 @@ async function createPasswordHash(password) {
 }
 
 async function validateEmailUsed(email) {
+  console.log('validate email service');
   return await DB.ValidateUserEmailExists(email);
 }
 export { createUser }

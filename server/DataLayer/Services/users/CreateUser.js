@@ -35,6 +35,7 @@ async function CreateUser(id, email, password, userToken) {
       return user;
     })
     .catch(err => {
+      console.error(err);
       throw err;
     });
 }
