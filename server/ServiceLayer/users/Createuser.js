@@ -11,6 +11,7 @@ function createUser() {
   return async (req, res, next) => {
     const { email, password } = req.body;
     const emailExists = await validateEmailUsed(email);
+    console.log(emailExists);
     const hashedPassword = await createPasswordHash(password);
 
     let newUser = {};
