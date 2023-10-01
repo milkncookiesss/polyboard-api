@@ -30,6 +30,9 @@ async function GetUserInfo(id) {
   }
 }
 
+// -------------------------------------------------------------------------- //
+/**
+*/
 async function GetUserInfoByEmail(email) {
   try {
     return await User.findOne({ where: { email }});
@@ -39,8 +42,21 @@ async function GetUserInfoByEmail(email) {
   }
 }
 
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function GetUserAndTokenInfo(id, token) {
+  try {
+    return await User.findOne({ where: { id, userToken: token }});
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 export { 
   checkUserEmailExists,
   GetUserInfo,
-  GetUserInfoByEmail
+  GetUserInfoByEmail,
+  GetUserAndTokenInfo
 };

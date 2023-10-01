@@ -1,11 +1,10 @@
 import JsonWebToken from 'jsonwebtoken';
-import { GetUserInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
+import { GetUserInfo, GetUserAndTokenInfo } from '../../DataLayer/Services/users/GetUserInfo.js';
 
 function auth() {
   return async (req, res, next) => {
     const secret = process.env.JWT_SECRET;
     const authHeader = req.headers.authorization;
-
     if (authHeader === null || authHeader === "" || !authHeader) {
       res.status(401).send({ message: "no token provided" });
       return;
@@ -30,7 +29,8 @@ function auth() {
     }
     const userId = decoded.user.id;
     const role = decoded.user.role;
-    const userExists = await checkUserExists(userId);
+    const userExists = await checkUserAndTokenExists(userId, authHeader);
+
     if (!userExists) {
       res.status(404).send({ message: "aurthorized user not found" });
       return;
@@ -62,8 +62,8 @@ async function sign(userId, email, role) {
 // -------------------------------------------------------------------------- //
 /**
 */
-async function checkUserExists(userId) {
-  const userInfo = await GetUserInfo(userId);
+async function checkUserAndTokenExists(userId, token) {
+  const userInfo = await GetUserAndTokenInfo(userId, token);
   let userExists = false;
   
   if (userInfo) {
@@ -72,6 +72,5 @@ async function checkUserExists(userId) {
 
   return userExists;
 }
-
 
 export { auth, sign }
