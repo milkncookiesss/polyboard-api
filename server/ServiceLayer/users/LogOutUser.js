@@ -6,7 +6,7 @@ import { UpdateUserTokenAtLogOut } from '../../DataLayer/Services/users/LogOutUs
 */
 function logOutUser() {
   return async (req, res, next) => {
-    const { userId } = req.body;
+    const { userId } = req.body.user;
     const userExists = await checkUserExists(userId);
 
     if (!userExists) {
@@ -14,9 +14,16 @@ function logOutUser() {
       return next();
     }
 
-    await UpdateUserTokenAtLogOut(userId);
-    res.status(200).send({});
-    next();
+    try {
+      await UpdateUserTokenAtLogOut(userId);
+      res.status(200).send(true);
+      next();
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ message: "could not log out user" });
+      next();
+      throw new Error(err);
+    }
   }
 }
 
