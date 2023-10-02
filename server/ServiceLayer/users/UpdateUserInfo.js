@@ -9,11 +9,11 @@ function updateUserInfo() {
     const userNameExists = await UserNameValidator(username);
 
     if (!userExists) {
-      res.status(404).send({ message: "user does not exist" });
+      res.status(404).send({ statusCode: 404, message: "user does not exist" });
       return next();
     }
     if (userNameExists) {
-      res.status(409).send({ message: 'username already exists' });
+      res.status(409).send({ statusCode: 409, message: 'username already exists' });
       return next();
     }
 
@@ -26,11 +26,11 @@ function updateUserInfo() {
       }
       delete updatePayload.user;
       
-      await UpdateUserInfo(userId, updatePayload);
-      res.status(200).send({ message: 'user info updated' });
+      const user = await UpdateUserInfo(userId, updatePayload);
+      res.status(200).send({ user });
     } catch (err) {
       console.error(err);
-      res.status(500).send({ message: 'could not update user' });
+      res.status(500).send({ statusCode: 500, message: 'could not update user' });
       throw err;
     }
     next();
