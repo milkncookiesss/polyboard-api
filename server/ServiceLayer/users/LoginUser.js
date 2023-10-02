@@ -16,6 +16,10 @@ function loginUser() {
       return next();
     }
     const userInfo = await DB.GetUserInfo(email);
+    if (!userInfo) {
+      res.status(404).send({ message: "email does not exist" });
+      return next();
+    }
     try {
       const comparePassword = await bcrypt.compare(
         password, 
