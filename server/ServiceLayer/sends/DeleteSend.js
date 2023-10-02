@@ -1,5 +1,5 @@
 import { DeleteSend } from "../../DataLayer/Services/sends/DeleteSend.js";
-import { GetSendInfo } from "../../DataLayer/Services/sends/GetSendInfo.js"
+import { GetSendInfo, CheckUserOwnsSend } from "../../DataLayer/Services/sends/GetSendInfo.js"
 import { GetUserInfo } from "../../DataLayer/Services/users/GetUserInfo.js";
 import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo.js";
 
@@ -13,6 +13,7 @@ function deleteSend() {
     const sendExists = await checkSendExists(sendId);
     const userExists = await checkUserExists(userId);
     const problemExists = await checkProblemExists(problemId);
+    const userOwnsSend = await checkUserOwnSend(userId, sendId);
 
     if (!userExists) {
       res.status(404).send({ message: "user not found" });
@@ -24,6 +25,10 @@ function deleteSend() {
     }
     if (!sendExists) {
       res.status(404).send({ message: "send not found" });
+      return next();
+    }
+    if (!userOwnsSend) {
+      res.status(401).send({ message: "cannot delete send not created by user" });
       return next();
     }
 
@@ -81,6 +86,17 @@ async function checkSendExists(sendId) {
   }
   
   return sendExists;
+}
+
+async function checkUserOwnSend(userId, sendId) {
+  const send = await CheckUserOwnsSend(userId, sendId);
+  let userOwnsSend = false;
+
+  if (send) {
+    userOwnsSend = true;
+  }
+
+  return userOwnsSend;
 }
 
 export { deleteSend };

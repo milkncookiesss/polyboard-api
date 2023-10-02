@@ -10,4 +10,13 @@ async function GetSendInfo(id) {
   return await Send.findOne({ where: { id }});
 }
 
-export { GetSendInfo };
+async function CheckUserOwnsSend(userId, id) {
+  try {
+    return await Send.count({ where: {id, userId} });
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+export { GetSendInfo, CheckUserOwnsSend };
