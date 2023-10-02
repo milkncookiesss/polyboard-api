@@ -7,7 +7,8 @@ const Op = Sequelize.Op;
 async function UpdateUserInfo(userId, updatePayload) {
   try {
     console.log('payload in data ', updatePayload);
-    await User.update(updatePayload, { where: { id: userId }});
+    const updatedUser = await User.update(updatePayload, { where: { id: userId }, returning: true, raw: true});
+    return updatedUser[1];
   } catch (err) {
     console.error(err);
     throw err;
