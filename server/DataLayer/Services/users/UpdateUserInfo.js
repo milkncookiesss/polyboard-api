@@ -14,7 +14,7 @@ async function UpdateUserInfo(userId, updatePayload) {
   }
 }
 
-async function CheckUserNameExists(userName) {
-  return await User.findOne({ where: { username: userName }});
+async function CheckUserNameExists(username) {
+  return await User.findOne({ where: { username }});
 }
 export { UpdateUserInfo, CheckUserNameExists }
