@@ -19,7 +19,8 @@ export default class Send extends Sequelize.Model {
           allowNull: false
         },
         rating: {
-          type: Sequelize.INTEGER
+          type: Sequelize.FLOAT,
+          defaultValue: 0
         },
         grade: {
           type: Sequelize.STRING
