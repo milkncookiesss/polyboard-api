@@ -11,4 +11,14 @@ async function GetProblemInfo(id) {
   return await Problem.findOne( { where: { id } } );
 }
 
-export { GetProblemInfo };
+async function CheckUserOwnsProblem(createdBy, id) {
+  try {
+    return await Problem.count( { where: { id, createdBy }});
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
+}
+
+
+export { GetProblemInfo, CheckUserOwnsProblem };
