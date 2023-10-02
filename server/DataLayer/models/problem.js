@@ -35,7 +35,8 @@ export default class Problem extends Sequelize.Model {
           defaultValue: 0
         },
         grade: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          defaultValue: 'none'
         },
         hidden: {
           type: Sequelize.BOOLEAN,

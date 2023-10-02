@@ -23,7 +23,8 @@ export default class Send extends Sequelize.Model {
           defaultValue: 0
         },
         grade: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          defaultValue: 'none'
         },
         note: {
           type: Sequelize.STRING
