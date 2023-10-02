@@ -19,6 +19,10 @@ function blockUser() {
       res.status(404).send({ message: "blocked user does not exist" });
       return next();
     }
+    if (userId === blockedUserId) {
+      res.status(405).send({ message: "cannot block yourself" });
+      return next();
+    }
 
     try {
       await BlockUserById(userId, blockedUserId);
