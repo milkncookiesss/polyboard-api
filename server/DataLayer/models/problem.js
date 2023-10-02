@@ -31,7 +31,7 @@ export default class Problem extends Sequelize.Model {
           allowNull: true
         },
         averageRating: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.FLOAT,
           defaultValue: 0
         },
         grade: {
