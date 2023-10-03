@@ -8,7 +8,6 @@ const Op = Sequelize.Op;
 /**
 */
 async function GetUserBlockListById(userId) {
-  console.log('yo dog we in the data layer of the get block list')
   try {
     const blockList = await BlockList.findAll(
       { 
@@ -20,7 +19,7 @@ async function GetUserBlockListById(userId) {
     return blockList;
   } catch (err) {
     console.error(err);
-    return err;
+    throw new Error(err);
   }
 }
 
