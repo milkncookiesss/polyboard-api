@@ -5,9 +5,9 @@ function auth() {
   return async (req, res, next) => {
     const secret = process.env.JWT_SECRET;
     const authHeader = req.headers.authorization;
-    console.log('=============> ', authHeader);
+
     if (authHeader === null || authHeader === "" || !authHeader) {
-      res.status(401).send({ message: "no token provided" });
+      res.status(401).send({ statusCode: 401, message: "no token provided" });
       return;
     }
 
@@ -16,8 +16,8 @@ function auth() {
       secret,
       (err, decoded) => {
         if (err) {
-          console.error(err);
-          res.status(404).send({ message: "token not provided" });
+          console.error('Error in JWT ', err);
+          res.status(404).send({ statusCode: 404, message: "token not provided" });
           throw new Error(err);
         }
 
@@ -25,7 +25,7 @@ function auth() {
       })
 
     if (decoded === null) {
-      res.status(401).send({ message: "unauthorized request" });
+      res.status(401).send({ statusCode: 401, message: "unauthorized request" });
       return;
     }
     const userId = decoded.user.id;
@@ -33,7 +33,7 @@ function auth() {
     const userExists = await checkUserAndTokenExists(userId, authHeader);
 
     if (!userExists) {
-      res.status(404).send({ message: "aurthorized user not found" });
+      res.status(404).send({ statusCode: 404, message: "aurthorized user not found" });
       return;
     }
 

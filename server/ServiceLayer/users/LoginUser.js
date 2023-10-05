@@ -4,6 +4,7 @@ import bcrypt, { compare } from 'bcrypt';
 import * as DB from '../../DataLayer/Services/users/LoginUser.js';
 import { validateEmail } from '../../Helpers/emailValidation.js';
 import { sign } from '../auth/Auth.js';
+
 // -------------------------------------------------------------------------- //
 /**
  * 
@@ -73,7 +74,6 @@ async function validateRequest(request) {
   const valid = validate(request);
 
   if (!valid) {
-    console.error('AJV error ', validate.errors[0].message);
     throw validate.errors[0];
   }
 }

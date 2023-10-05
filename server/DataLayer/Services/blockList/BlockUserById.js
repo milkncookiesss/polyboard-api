@@ -13,7 +13,7 @@ async function BlockUserById(userId, blockedUserId) {
     await BlockList.create({ userId, blockedUserId });
   } catch (err) {
     console.error(err);
-    return err;
+    throw new Error(err);
   }
 }
 

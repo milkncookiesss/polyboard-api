@@ -1,18 +1,21 @@
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 import { UpdatePassword, DeleteUserPasswordResetCodeRecords, ResetCodeExistsForUser } from '../../DataLayer/Services/users/UpdatePassword.js';
 import bcrypt from 'bcrypt';
 
 function updatePassword() {
   return async (req, res, next) => {
-    const { userEmail, password, code } = req.body;
-    const hashedPassword = await createPasswordHash(password);
-    const resetCodeExists = await ValidateResetCodeExistsForUser(userEmail, code);
-
-    if (!resetCodeExists) {
-      res.status(404).send({ message: 'user provided incorrect code' });
-      return next();
-    }
-
     try {
+      await validateRequest(req.body);
+      const { userEmail, password, code } = req.body;
+      const hashedPassword = await createPasswordHash(password);
+      const resetCodeExists = await ValidateResetCodeExistsForUser(userEmail, code);
+
+      if (!resetCodeExists) {
+        res.status(404).send({ statusCode: 404, message: 'user provided incorrect code' });
+        return next();
+      }
+
       await Promise.all(
         [
           await UpdatePassword(userEmail, hashedPassword), 
@@ -20,13 +23,12 @@ function updatePassword() {
         ]
       );
       
-      res.status(200).send({ message: 'password updated' });
+      res.status(200).send({ statusCode: 200, message: 'password updated' });
       next();
     } catch (err) {
-      console.error(err);
-      res.status(500).send({ message: 'could not update password' });
+      console.error('Erorr in UpdatePassword ', err);
+      res.status(500).send({ statusCode: 500, message: 'could not update password' });
       next();
-      throw err;
     }
   }
 }
@@ -53,6 +55,41 @@ async function ValidateResetCodeExistsForUser(email, code) {
     codeExists = true;
   }
   return codeExists;
+}
+
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function validateRequest(request) {
+  const ajv = new Ajv();
+
+  const schema = {
+    type: "object",
+    properties: {
+      userEmail: {
+        type: "string",
+        format: "email"
+      },
+      password: {
+        type: "string",
+        minLength: 6
+      },
+      code: {
+        type: "string"
+      }
+    },
+    required: ["userEmail", "password", "code"],
+    additionalProperties: true
+  };
+
+  addFormats(ajv);
+  const validate = ajv.compile(schema);
+  const valid = validate(request);
+
+  if (!valid) {
+    console.error('AJV error ', validate.errors[0].message);
+    throw validate.errors[0];
+  }
 }
 
 export { updatePassword };

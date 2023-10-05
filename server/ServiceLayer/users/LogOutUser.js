@@ -69,7 +69,6 @@ async function validateRequest(request) {
   const valid = validate(request);
 
   if (!valid) {
-    console.error('AJV error ', validate.errors[0].message);
     throw validate.errors[0];
   }
 }

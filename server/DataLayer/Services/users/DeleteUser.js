@@ -14,14 +14,14 @@ async function DeleteUser(id) {
   return sequelize.transaction(async (transaction) => {
     try {
       await Promise.all([
-        DeleteUserProblems(id, transaction),
-        DeleteUserSends(id, transaction),
+        await DeleteUserProblems(id, transaction),
+        await DeleteUserSends(id, transaction),
         await User.destroy({ where: { id }, transaction})
       ]);
     } catch (err) {
-      console.log(err);
+      console.error('error in deleting user data ', err);
       transaction.rollback();
-      throw err;
+      throw new Error(err);
     }
   });
 }
