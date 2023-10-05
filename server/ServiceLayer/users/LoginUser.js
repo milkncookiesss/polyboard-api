@@ -32,7 +32,7 @@ function loginUser() {
         .catch(err => { throw err });
       
       if (!comparePassword) {
-        res.status(401).send({ message: "incorrect password or email" });
+        res.status(401).send({ statusCode: 401, message: "incorrect password or email" });
         return next();
       }
 

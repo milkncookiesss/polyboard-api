@@ -14,7 +14,7 @@ function logOutUser() {
       const userExists = await checkUserExists(userId);
 
       if (!userExists) {
-        res.status(404).send({ message: "user was not found" });
+        res.status(404).send({ statusCode: 404, message: "user was not found" });
         return next();
       }
 
@@ -22,8 +22,8 @@ function logOutUser() {
       res.status(200).send(true);
       next();
     } catch (err) {
-      console.error(err);
-      res.status(500).send({ message: err.message });
+      console.error('Error in LogOutUser ', err);
+      res.status(500).send({ statusCode: 500, message: err.message });
       next();
     }
   }

@@ -31,12 +31,12 @@ function updateUserInfo() {
       
       const user = await UpdateUserInfo(userId, updatePayload);
       res.status(200).send({ user });
+      next();
     } catch (err) {
-      console.error(err);
+      console.error('Error in UpdateuserInfo ', err);
       res.status(500).send({ statusCode: 500, message: 'could not update user' });
-      throw err;
+      next();
     }
-    next();
   }
 }
 

@@ -13,7 +13,7 @@ function sendPasswordResetLink() {
     const passwordResetCode = PasswordResetCodeGenerator();
 
     if (!userExists) {
-      res.status(404).send({ message: "user does not exist" });
+      res.status(404).send({ statusCode: 404, message: "user does not exist" });
       return next();
     }
     try {
@@ -42,12 +42,12 @@ function sendPasswordResetLink() {
   
       const info = await transporter.sendMail(mailData);
       res.status(200).send(true);
+      next();
     } catch (err) {
-      console.log(err);
+      console.log('Error in ResetPassword ', err);
       res.status(500).send(false);
-      throw err;
+      next();
     }
-    next();
   }
 }
 
