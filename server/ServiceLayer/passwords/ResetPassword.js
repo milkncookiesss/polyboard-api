@@ -48,7 +48,7 @@ function sendPasswordResetLink() {
       next();
     } catch (err) {
       console.log('Error in ResetPassword ', err);
-      res.status(500).send(false);
+      res.status(500).send({ statusCode: 500, message: "Could not send password reset."});
       next();
     }
   }
