@@ -1,3 +1,5 @@
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 import nodemailer from 'nodemailer';
 import { GetUserInfoByEmail } from '../../DataLayer/Services/users/GetUserInfo.js';
 import { CreatePasswordResetCodeRecord } from '../../DataLayer/Services/users/ResetPassword.js';
@@ -8,15 +10,16 @@ const emailHost = process.env.SMTP_HOST;
 
 function sendPasswordResetLink() {
   return async (req, res, next) => {
-    const { userEmail } = req.body;
-    const userExists = await CheckUserExists(userEmail);
-    const passwordResetCode = PasswordResetCodeGenerator();
-
-    if (!userExists) {
-      res.status(404).send({ statusCode: 404, message: "user does not exist" });
-      return next();
-    }
     try {
+      await validateRequest(req.body);
+      const { userEmail } = req.body;
+      const userExists = await CheckUserExists(userEmail);
+      const passwordResetCode = PasswordResetCodeGenerator();
+
+      if (!userExists) {
+        res.status(404).send({ statusCode: 404, message: "user does not exist" });
+        return next();
+      }
       await CreatePasswordResetCodeRecord(userEmail, passwordResetCode);
       const transporter = nodemailer.createTransport({
         port: emailPort,
@@ -71,6 +74,36 @@ function PasswordResetCodeGenerator() {
   }
 
   return code;
+}
+
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function validateRequest(request) {
+  const ajv = new Ajv();
+
+  const schema = {
+    type: "object",
+    properties: {
+      userEmail: {
+        type: "string",
+        format: "email"
+      },
+      role: {
+        type: "string"
+      }
+    },
+    required: ["userEmail"],
+    additionalProperties: true
+  };
+
+  addFormats(ajv);
+  const validate = ajv.compile(schema);
+  const valid = validate(request);
+
+  if (!valid) {
+    throw validate.errors[0];
+  }
 }
 
 export { sendPasswordResetLink }
