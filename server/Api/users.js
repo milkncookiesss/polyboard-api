@@ -27,7 +27,6 @@ usersRouter.patch("/users/updatePassword", updatePassword());
 usersRouter.delete("/users/unBlockUser", auth(), unBlockUser());
 usersRouter.delete("/users/delete", auth(), deleteUser());
 usersRouter.patch("/users/updateUserInfo", auth(), updateUserInfo());
-usersRouter.delete("/users/delete", deleteUser());
 
 
 export default usersRouter;
