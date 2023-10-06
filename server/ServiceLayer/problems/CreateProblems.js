@@ -58,7 +58,7 @@ async function validateRequest(request) {
         }
       }
     },
-    required: ["createdBy", "name", "route", "weight", "user"],
+    required: ["name", "route", "weight", "user"],
     additionalProperties: false
   };
 
