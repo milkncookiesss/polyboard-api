@@ -74,6 +74,10 @@ async function validateRequest(request) {
   const schema = {
     type: "object",
     properties: {
+      userId: {
+        type: "string",
+        format: "uuid"
+      },
       problemId: {
         type: "string",
         format: "uuid"
