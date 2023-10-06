@@ -33,10 +33,6 @@ async function validateRequest(request) {
   const schema = {
     type: "object",
     properties: {
-      createdBy: {
-        type: "string",
-        format: "uuid"
-      },
       name: {
         type: "string"
       },
