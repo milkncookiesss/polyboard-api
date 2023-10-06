@@ -66,7 +66,7 @@ async function validateRequest(request) {
       }
     },
     required: ["email", "password"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);

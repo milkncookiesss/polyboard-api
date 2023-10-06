@@ -132,7 +132,7 @@ async function validateRequest(request) {
       }
     },
     required: ["problemId", "sendId", "user"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);

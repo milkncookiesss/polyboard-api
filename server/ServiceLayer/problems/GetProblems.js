@@ -38,7 +38,7 @@ async function validateRequest(request) {
       }
     },
     required: ["userId", "role"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);

@@ -55,7 +55,7 @@ async function validateRequest(request) {
       }
     },
     required: ["userId"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);

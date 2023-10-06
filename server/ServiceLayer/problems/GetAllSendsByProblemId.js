@@ -59,7 +59,7 @@ async function validateRequest(request) {
       }
     },
     required: ["problemId"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);
