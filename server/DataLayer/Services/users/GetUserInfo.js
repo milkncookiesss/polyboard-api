@@ -14,7 +14,7 @@ async function checkUserEmailExists(email) {
     return user;
   } catch (err) {
     console.error(err);
-    throw new Error
+    throw new Error(err);
   }
 }
 
@@ -26,7 +26,7 @@ async function GetUserInfo(id) {
     return await User.findOne({ where: { id }});
   } catch(err) {
     console.error(err);
-    throw err;
+    throw new Error(err);
   }
 }
 
@@ -38,7 +38,7 @@ async function GetUserInfoByEmail(email) {
     return await User.findOne({ where: { email }});
   } catch (err) {
     console.error(err);
-    throw err;
+    throw new Error(err);
   }
 }
 
@@ -49,8 +49,8 @@ async function GetUserAndTokenInfo(id, token) {
   try {
     return await User.findOne({ where: { id, userToken: token }});
   } catch (err) {
-    console.error(err);
-    throw err;
+    console.error('Error In GetUserAndTokenInfo ', err);
+    throw new Error(err);
   }
 }
 
