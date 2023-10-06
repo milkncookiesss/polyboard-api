@@ -59,7 +59,7 @@ async function validateRequest(request) {
       }
     },
     required: ["name", "route", "weight", "user"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);

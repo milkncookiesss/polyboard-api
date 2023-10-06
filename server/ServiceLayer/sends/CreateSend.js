@@ -104,7 +104,7 @@ async function validateRequest(request) {
       }
     },
     required: ["problemId", "user"],
-    additionalProperties: false
+    additionalProperties: true
   };
 
   addFormats(ajv);
