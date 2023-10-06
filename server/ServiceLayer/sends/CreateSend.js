@@ -10,6 +10,7 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 function createSend() {
   return async (req, res, next) => {
     try {
+      console.log('inside create send ', req.body);
       await validateRequest(req.body);
       const { userId } = req.body.user;
       const { problemId, note, rating, grade } = req.body;
