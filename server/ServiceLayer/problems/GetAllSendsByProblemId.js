@@ -1,3 +1,5 @@
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 import { GetAllSendsByProblemId } from "../../DataLayer/Services/problems/GetProblemById.js";
 import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo.js";
 
@@ -6,23 +8,23 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 */
 function getAllSendsByProblemId() {
   return async (req, res, next) => {
-    const { problemId } = req.query;
-    const problemExists = await ValidateProblemExists(problemId);
-
-    if (!problemExists) {
-      res.status(404).send({ message: "problem not found" });
-      return next();
-    }
-
     try {
+      await validateRequest(req.query);
+      const { problemId } = req.query;
+      const problemExists = await ValidateProblemExists(problemId);
+
+      if (!problemExists) {
+        res.status(404).send({ statusCode: 404, message: "problem not found" });
+        return next();
+      }
+
       const sends = await GetAllSendsByProblemId(problemId);
       res.status(200).send( { sends });
       next();
     } catch (err) {
-      console.error(err);
-      res.status(500).send({ message: "could not get sends for problem" });
+      console.error("Error In GetAllSendsByProblemId ", err);
+      res.status(500).send({ statusCode: 500, message: "could not get sends for problem" });
       next();
-      throw err;
     }
   }
 }
@@ -39,6 +41,34 @@ async function ValidateProblemExists(problemId) {
   }
 
   return problemExists;
+}
+
+// -------------------------------------------------------------------------- //
+/**
+*/
+async function validateRequest(request) {
+  const ajv = new Ajv();
+
+  const schema = {
+    type: "object",
+    properties: {
+      problemId: {
+        type: "string",
+        format: "uuid"
+      }
+    },
+    required: ["problemId"],
+    additionalProperties: false
+  };
+
+  addFormats(ajv);
+  const validate = ajv.compile(schema);
+  const valid = validate(request);
+
+  if (!valid) {
+    console.error('AJV error ', validate.errors[0].message);
+    throw validate.errors[0];
+  }
 }
 
 export { getAllSendsByProblemId }
