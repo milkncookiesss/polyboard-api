@@ -9,6 +9,7 @@ import * as DB from '../../DataLayer/Services/problems/CreateProblems.js';
 function createProblem() {
   return async (req, res, next) => {
     try{
+      console.log('inside create problem ', req.body);
       await validateRequest(req.body);
       const { name="", route, creatorNote="", weight="" } = req.body;
       const { userId } = req.body.user;

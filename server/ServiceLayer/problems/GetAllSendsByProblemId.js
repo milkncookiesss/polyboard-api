@@ -9,6 +9,7 @@ import { GetProblemInfo } from "../../DataLayer/Services/problems/GetProblemInfo
 function getAllSendsByProblemId() {
   return async (req, res, next) => {
     try {
+      console.log('get all sends by problem id ', req.query);
       await validateRequest(req.query);
       const { problemId } = req.query;
       const problemExists = await ValidateProblemExists(problemId);
