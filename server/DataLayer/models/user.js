@@ -42,6 +42,10 @@ export default class User extends Sequelize.Model {
         confirmedAccount: {
           type: Sequelize.BOOLEAN,
           defaultValue: false
+        },
+        verifiedUser: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
         }
       },
       {
