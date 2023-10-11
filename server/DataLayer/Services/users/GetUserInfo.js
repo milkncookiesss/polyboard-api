@@ -28,14 +28,13 @@ async function GetUserInfo(id) {
         where: {
           id 
         },
-        attributes: [
-          'id', 
-          'username', 
-          'displayname', 
-          'email', 
-          'hidden', 
-          'createdAt'
-        ]
+        attributes: {
+          exclude: 
+          [
+            'password',
+            'userToken'
+          ]
+        }
       }
     );
   } catch(err) {

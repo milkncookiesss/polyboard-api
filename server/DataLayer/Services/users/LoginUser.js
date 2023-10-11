@@ -38,7 +38,12 @@ async function UpdateUserToken(id, userToken) {
       raw: true
     }
   )
-  .then(userInfo => userInfo[1][0])
+  .then(userInfo => {
+    const user = userInfo[1][0]
+    delete user.password;
+
+    return user;
+  })
   .catch((err) => {
     console.error(err);
     throw new Error(err);

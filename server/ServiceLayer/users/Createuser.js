@@ -27,6 +27,7 @@ function createUser() {
       const role = 'user';
       const userToken = await sign(id, email, role);
       newUser = await DB.CreateUser(id, email, hashedPassword, userToken);
+
       res.status(200).send(newUser);
       next();
     } catch(err) {
