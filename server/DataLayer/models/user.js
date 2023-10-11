@@ -38,6 +38,10 @@ export default class User extends Sequelize.Model {
         role: {
           type: Sequelize.STRING,
           defaultValue: 'user'
+        },
+        confirmedAccount: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
         }
       },
       {
