@@ -23,7 +23,20 @@ async function checkUserEmailExists(email) {
 */
 async function GetUserInfo(id) {
   try {
-    return await User.findOne({ where: { id }});
+    return await User.findOne(
+      {
+        where: {
+          id 
+        },
+        attributes: {
+          exclude: 
+          [
+            'password',
+            'userToken'
+          ]
+        }
+      }
+    );
   } catch(err) {
     console.error(err);
     throw new Error(err);

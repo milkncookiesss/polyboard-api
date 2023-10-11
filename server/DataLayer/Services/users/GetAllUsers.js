@@ -11,14 +11,13 @@ async function GetAllUsers() {
   try {
     return await User.findAll(
       {
-        attributes: [
-          'id', 
-          'username', 
-          'displayname', 
-          'email', 
-          'hidden', 
-          'createdAt'
-        ]
+        attributes: {
+          exclude: 
+            [
+              'password',
+              'userToken'
+            ]
+        }
       }
     );
   } catch (err) {
