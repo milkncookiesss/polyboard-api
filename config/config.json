@@ -8,10 +8,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "fovqunfdagjatq",
-    "password": "4b55aedd01500b840eba14d55ece55b66e2cc8a2c3e5d7cdc438710cabd114db",
-    "database": "da8siguit7oel",
-    "host": "ec2-107-22-101-0.compute-1.amazonaws.com",
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
     "port": 5432,
     "dialect": "postgres",
     "dialectOptions": {
